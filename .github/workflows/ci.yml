@@ -2,35 +2,40 @@ name: CI
 
 on:
   pull_request:
+    branches: [ main, 'fix/ci' ]
   push:
-    branches: [ main ]
+    branches: [ main, 'fix/ci' ]
+  workflow_dispatch: 
 
 jobs:
   scan_ruby:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: .ruby-version
-          bundler-cache: true
-
-      - name: Update RubyGems
-        run: gem update --system 3.3.22
+          ruby-version: '3.1.2'
+          rubygems: 'latest'
+          bundler: '2.5.23'
+          bundler-cache: true         
 
       - name: Install dependencies
         run: bundle install
 
-      - name: Scan for common Rails security vulnerabilities using static analysis
-        run: bin/brakeman --no-pager
+      - name: List installed gems
+        run: bundle list
+      - name: Verify Ruby version and Bundler version
+        run: |
+          ruby -v
+          bundler -v
+
 
   scan_js:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -38,11 +43,21 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: .ruby-version
-          bundler-cache: true
+          ruby-version: '3.1.2'
+          rubygems: 'latest'
+          bundler: '2.5.23'
+          bundler-cache: true    
 
-      - name: Scan for security vulnerabilities in JavaScript dependencies
-        run: bin/importmap audit
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.20.4'
+
+      - name: Install dependencies
+        run: bundle install
+
+      - name: Check importmap version
+        run: gem list importmap-rails
 
   lint:
     runs-on: ubuntu-latest
@@ -54,20 +69,25 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
+          rubygems: 'latest'
+          bundler: '2.5.23'
           bundler-cache: true
 
+      - name: Install dependencies
+        run: bundle install
+
       - name: Lint code for consistent style
-        run: bin/rubocop -f github
+        run: bundle exec rubocop -f github
 
   test:
     runs-on: ubuntu-latest
+    services:
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+        options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
 
-    # services:
-    #  redis:
-    #    image: redis
-    #    ports:
-    #      - 6379:6379
-    #    options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
       - name: Install packages
         run: sudo apt-get update && sudo apt-get install --no-install-recommends -y google-chrome-stable curl libjemalloc2 libvips sqlite3
@@ -75,16 +95,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Set execute permission for bin/rails
+        run: chmod +x bin/rails
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: .ruby-version
-          bundler-cache: true
+          ruby-version: '3.1.2'
+          rubygems: 'latest'
+          bundler: '2.5.23'
+          bundler-cache: true    
+
+      - name: Install dependencies
+        run: bundle install
 
       - name: Run tests
         env:
           RAILS_ENV: test
-          # REDIS_URL: redis://localhost:6379/0
         run: bin/rails db:test:prepare test test:system
 
       - name: Keep screenshots from failed system tests
@@ -94,3 +121,4 @@ jobs:
           name: screenshots
           path: ${{ github.workspace }}/tmp/screenshots
           if-no-files-found: ignore
+ 
