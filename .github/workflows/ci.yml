@@ -17,11 +17,8 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1.2'
+          ruby-version: .ruby-version
           bundler-cache: true
-
-      - name: Update RubyGems
-        run: gem update --system 3.3.22
 
       - name: Install dependencies
         run: bundle install
@@ -29,19 +26,40 @@ jobs:
       - name: Scan for common Rails security vulnerabilities using static analysis
         run: bundle exec brakeman --no-pager
 
+      - name: Check Ruby version
+        run: ruby -v
+
+      - name: Check Bundler version
+        run: bundle -v
+
+      - name: Check Node.js version
+        run: node -v
+
   scan_js:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'
 
+      - name: Install dependencies
+        run: bundle install
+
       - name: Scan for security vulnerabilities in JavaScript dependencies
         run: bundle exec importmap audit
+
+      - name: Check importmap version
+        run: bundle exec importmap --version
 
   lint:
     runs-on: ubuntu-latest
@@ -52,7 +70,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1.2'
+          ruby-version: .ruby-version
           bundler-cache: true
 
       - name: Lint code for consistent style
@@ -77,8 +95,11 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1.2'
+          ruby-version: .ruby-version
           bundler-cache: true
+
+      - name: Install dependencies
+        run: bundle install
 
       - name: Run tests
         env:
