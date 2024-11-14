@@ -29,14 +29,13 @@ jobs:
       - name: Scan for common Rails security vulnerabilities using static analysis
         run: bundle exec brakeman --no-pager
 
-      - name: Check Ruby version
-        run: ruby -v
+      - name: List installed gems
+        run: bundle list
+      - name: Verify Ruby version and Bundler version
+        run: |
+          ruby -v
+          bundler -v
 
-      - name: Check Bundler version
-        run: bundle -v
-
-      - name: Check Node.js version
-        run: node -v
 
   scan_js:
     runs-on: ubuntu-latest
