@@ -73,6 +73,9 @@ jobs:
           bundler: '2.5.23'
           bundler-cache: true
 
+      - name: Install dependencies
+        run: bundle install
+
       - name: Lint code for consistent style
         run: bundle exec rubocop -f github
 
