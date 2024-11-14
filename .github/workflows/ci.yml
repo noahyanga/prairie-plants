@@ -2,10 +2,10 @@ name: CI
 
 on:
   pull_request:
-    branches: [ main, 'fix/ci' ] 
+    branches: [ main, 'fix/ci' ]
   push:
-    branches: [ main, 'fix/ci' ] 
-  workflow_dispatch:
+    branches: [ main, 'fix/ci' ]
+  workflow_dispatch: 
 
 jobs:
   scan_ruby:
