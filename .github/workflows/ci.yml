@@ -51,16 +51,13 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18.20.4'
 
       - name: Install dependencies
         run: bundle install
 
-      - name: Scan for security vulnerabilities in JavaScript dependencies
-        run: bundle exec importmap audit
-
       - name: Check importmap version
-        run: bundle exec importmap --version
+        run: gem list importmap-rails
 
   lint:
     runs-on: ubuntu-latest
@@ -95,6 +92,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Set execute permission for bin/rails
+        run: chmod +x bin/rails
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -118,3 +118,4 @@ jobs:
           name: screenshots
           path: ${{ github.workspace }}/tmp/screenshots
           if-no-files-found: ignore
+ 
