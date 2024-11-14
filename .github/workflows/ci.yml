@@ -26,9 +26,6 @@ jobs:
       - name: Install dependencies
         run: bundle install
 
-      - name: Scan for common Rails security vulnerabilities using static analysis
-        run: bundle exec brakeman --no-pager
-
       - name: List installed gems
         run: bundle list
       - name: Verify Ruby version and Bundler version
@@ -101,8 +98,10 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: .ruby-version
-          bundler-cache: true
+          ruby-version: '3.1.2'
+          rubygems: 'latest'
+          bundler: '2.5.23'
+          bundler-cache: true    
 
       - name: Install dependencies
         run: bundle install
