@@ -14,11 +14,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: .ruby-version
-          bundler-cache: true
+          ruby-version: '3.1.2'
+          rubygems: 'latest'
+          bundler: '2.5.23'
+          bundler-cache: true         
 
       - name: Install dependencies
         run: bundle install
@@ -44,8 +47,10 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: .ruby-version
-          bundler-cache: true
+          ruby-version: '3.1.2'
+          rubygems: 'latest'
+          bundler: '2.5.23'
+          bundler-cache: true    
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -71,6 +76,8 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
+          rubygem: 'latest'
+          bundler: '2.5.23'
           bundler-cache: true
 
       - name: Lint code for consistent style
