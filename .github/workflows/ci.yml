@@ -69,7 +69,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
-          rubygem: 'latest'
+          rubygems: 'latest'
           bundler: '2.5.23'
           bundler-cache: true
 
