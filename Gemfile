@@ -20,8 +20,13 @@ gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
+# Rubocop
 gem 'rubocop'
 gem 'rubocop-rails'
+
+# Active Admin
+gem 'activeadmin'
+gem 'devise'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
