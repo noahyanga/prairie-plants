@@ -1,7 +1,7 @@
 require 'nokogiri'
 require 'httparty'
 
-# Define URLs for each category
+# URLs for each category
 CATEGORY_URLS = {
   'Indoor Plants'     => 'https://bloomscape.com/shop/plants/indoor-plant/',
   'Plant Decorations' => 'https://bloomscape.com/shop/plant-care-accessories/accessories/',
@@ -10,10 +10,11 @@ CATEGORY_URLS = {
   'Supplies'          => 'https://bloomscape.com/shop/plant-care-accessories/supplies/'
 }
 
+# Clear existing data
 ProductCategory.delete_all
 Product.delete_all
 Category.delete_all
-
+Image.delete_all
 
 # Method to scrape data for a specific category
 def scrape_category(url, category_name)
@@ -29,7 +30,8 @@ def scrape_category(url, category_name)
     image_url = product.at_css('.single-img img')&.[]('src') || 'http://example.com/placeholder.jpg'
     description = "A quality #{category_name.downcase} product."
 
-    products << { name: name, description: description, price: price, category_name: category_name }
+    products << { name: name, description: description, price: price, category_name: category_name,
+image_url: image_url }
   end
 
   products
@@ -46,11 +48,14 @@ CATEGORY_URLS.each do |category_name, url|
   category = Category.find_by(name: category_name)
 
   plants_data.each do |plant_data|
-    # Create a product entry in the database
+    # Create the product entry in the database
     product = Product.create(name: plant_data[:name], description: plant_data[:description],
 price: plant_data[:price])
+
+    # Create the relationship with the category
     ProductCategory.create(product: product, category: category)
 
+    # Create image for the product
     Image.create(product: product, image_url: plant_data[:image_url])
   end
 end
