@@ -35,6 +35,9 @@ gem 'httparty'
 # Sassc
 gem 'sassc-rails'
 
+# Google cloud storage
+gem 'google-cloud-storage'
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
