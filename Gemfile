@@ -28,6 +28,10 @@ gem 'rubocop-rails'
 gem 'activeadmin'
 gem 'devise'
 
+# Nokogiri + HTTParty for scraping
+gem 'nokogiri'
+gem 'httparty'
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 

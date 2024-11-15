@@ -1,0 +1,25 @@
+=> 
+[[32m#<Category:0x00007f93d9ac8b30[0m
+  id: [34m[1m1[0m,
+  name: [31m[1m"[0m[31mIndoor Plants[0m[31m[1m"[0m,
+  description: [31m[1m"[0m[31mIndoor Plants from Bloomscape.[0m[31m[1m"[0m,
+  created_at: [31m[1m"[0m[31m2024-11-15 01:33:27.959335000 +0000[0m[31m[1m"[0m,
+  updated_at: [31m[1m"[0m[31m2024-11-15 01:33:27.959335000 +0000[0m[31m[1m"[0m[32m>[0m,
+ [32m#<Category:0x00007f93d982ad60[0m
+  id: [34m[1m2[0m,
+  name: [31m[1m"[0m[31mPlant Decorations[0m[31m[1m"[0m,
+  description: [31m[1m"[0m[31mPlant Decorations from Bloomscape.[0m[31m[1m"[0m,
+  created_at: [31m[1m"[0m[31m2024-11-15 01:33:27.991758000 +0000[0m[31m[1m"[0m,
+  updated_at: [31m[1m"[0m[31m2024-11-15 01:33:27.991758000 +0000[0m[31m[1m"[0m[32m>[0m,
+ [32m#<Category:0x00007f93d982ac98[0m
+  id: [34m[1m3[0m,
+  name: [31m[1m"[0m[31mPots & Planters[0m[31m[1m"[0m,
+  description: [31m[1m"[0m[31mPots & Planters from Bloomscape.[0m[31m[1m"[0m,
+  created_at: [31m[1m"[0m[31m2024-11-15 01:33:28.015102000 +0000[0m[31m[1m"[0m,
+  updated_at: [31m[1m"[0m[31m2024-11-15 01:33:28.015102000 +0000[0m[31m[1m"[0m[32m>[0m,
+ [32m#<Category:0x00007f93d982abd0[0m
+  id: [34m[1m4[0m,
+  name: [31m[1m"[0m[31mGardening Tools[0m[31m[1m"[0m,
+  description: [31m[1m"[0m[31mGardening Tools from Bloomscape.[0m[31m[1m"[0m,
+  created_at: [31m[1m"[0m[31m2024-11-15 01:33:28.037447000 +0000[0m[31m[1m"[0m,
+  updated_at: [31m[1m"[0m[31m2024-11-15 01:33:28.037447000 +0000[0m[31m[1m"[0m[32m>[0m]
