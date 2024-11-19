@@ -1,0 +1,8 @@
+<h1>Categories</h1>
+<ul class="nav nav-pills">
+  <% @categories.each do |category| %>
+    <li class="nav-item">
+      <%= link_to category.name, category_path(category), class: "nav-link" %>
+    </li>
+  <% end %>
+</ul>
