@@ -1,8 +1,23 @@
-<h1>Categories</h1>
-<ul class="nav nav-pills">
-  <% @categories.each do |category| %>
-    <li class="nav-item">
-      <%= link_to category.name, category_path(category), class: "nav-link" %>
-    </li>
-  <% end %>
-</ul>
+ <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Prairie Plants - Home</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+
+    <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" rel="stylesheet">
+  </head>
+  <body> 
+<h1 class="title">Categories</h1>
+<div class="tabs is-boxed">
+  <ul>
+    <% @categories.each do |category| %>
+      <li><%= link_to category.name, category_path(category), class: "is-active" %></li>
+    <% end %>
+  </ul>
+</div>
+</body>
+</html>

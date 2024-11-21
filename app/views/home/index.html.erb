@@ -1,35 +1,76 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>Prairie Plants - Home</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <!-- Bulma CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" rel="stylesheet">
   </head>
   <body>
-    <div class="container mt-5"></div>
-      <h1 class="text-center mb-4">Our Products</h1>
+    <!-- Header Section -->
+    <header class="hero is-primary">
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <h1 class="title">Welcome to Prairie Plants</h1>
+          <h2 class="subtitle">Bringing nature closer to your home.</h2>
+          <a href="<%= categories_path %>" class="button is-large is-link">Shop Now</a>
+        </div>
+      </div>
+    </header>
 
-      <% if @products.any? %>
-        <div class="row">
-          <% @products.each do |product| %>
-            <div class="col-md-4 mb-4">
+    <!-- Featured Categories Section -->
+    <section class="section">
+      <div class="container">
+        <h2 class="title has-text-centered">Our Featured Plant Categories</h2>
+        <div class="columns is-multiline">
+          <% @categories.each do |category| %>
+            <div class="column is-one-third">
               <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title"><%= product.name %></h5>
-                  <p class="card-text">
-                    Price: $<%= product.price %><br>
-                    <%= truncate(product.description, length: 100) %>
-                  </p>
-                  <a href="<%= product_path(product) %>" class="btn btn-primary">View Details</a>
+                <div class="card-content">
+                  <h3 class="title is-4"><%= category.name %></h3>
+                  <p class="content"><%= category.description %></p>
+                  <a href="<%= category_path(category) %>" class="button is-link is-small">Explore</a>
                 </div>
               </div>
             </div>
           <% end %>
         </div>
-      <% end %>
-    </div>
+      </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="section has-background-light">
+      <div class="container">
+        <h2 class="title has-text-centered">Our Top Products</h2>
+        <div class="columns is-multiline">
+          <% @products.limit(6).each do |product| %>
+            <div class="column is-one-third">
+              <div class="card custom-card">
+                <div class="card-content">
+                  <h5 class="title is-5"><%= product.name %></h5>
+                  <p class="subtitle is-6">Price: $<%= product.price %></p>
+                  <p class="content"><%= truncate(product.description, length: 80) %></p>
+                  <a href="<%= product_path(product) %>" class="button is-link is-small">View Details</a>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="section">
+      <div class="container has-text-centered">
+        <h2 class="title">About Prairie Plants</h2>
+        <p class="content">We are passionate about bringing the beauty of plants into your home. Our wide selection of plants is perfect for every environment, from low-maintenance indoor plants to vibrant garden additions.</p>
+        <a href="/about" class="button is-primary is-large">Learn More</a>
+      </div>
+    </section>
   </body>
 </html>

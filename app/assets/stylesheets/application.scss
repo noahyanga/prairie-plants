@@ -13,4 +13,5 @@
  *= require_tree .
  *= require_self
  */
-@import "bootstrap";
+ // application.scss
+@import 'bulma';  // Include Bulma after overriding variables
