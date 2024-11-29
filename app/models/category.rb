@@ -7,6 +7,6 @@ class Category < ApplicationRecord
   validates :description, presence: true
 
   def ancestors
-    parent ? parent.ancestors + [parent] : []
+    parent ? parent.ancestors + [ parent ] : []
   end
 end

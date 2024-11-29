@@ -20,80 +20,43 @@
 
     <!-- Custom Stylesheet -->
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <link rel="icon" href="<%= asset_path('/plant.ico') %>" type="image/x-icon">
+
 
     <!-- Custom Head Content (if any) -->
     <%= yield :head %>
 
     <%= javascript_importmap_tags %>
   </head>
+
   <body class="is-flex is-flex-direction-column is-min-height-100">
-    <!-- Navbar -->
-    <nav class="navbar has-background-success">
-      <div class="navbar-brand">
-        <h1><a class="navbar-item" href="/">Prairie Plants</a></h1>
-        <button class="navbar-burger burger" data-target="navbarMenu" aria-label="menu" aria-expanded="false">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </button>
-      </div>
+    <!-- Navbar Partial -->
+    <%= render 'layouts/navbar' %>
 
-      <div id="navbarMenu" class="navbar-menu">
-        <div class="navbar-start">
-          <a class="navbar-item" href="<%= root_path %>">Home</a>
-          <a class="navbar-item" href="<%= categories_path %>">Categories</a>
+    <div class="container mt-4">
+      <% flash.each do |key, message| %>
+        <div class="notification is-<%= key == 'notice' ? 'success' : 'danger' %>">
+          <%= message %>
         </div>
-      </div>
-    </nav>
+      <% end %>
+    </div>
 
-      <div class="container mt-4">
-    <% flash.each do |key, message| %>
-      <div class="notification is-<%= key == 'notice' ? 'success' : 'danger' %>">
-        <%= message %>
-      </div>
+
+    <!-- Conditionally Render Search Bar -->
+    <% unless controller_name == 'sessions' || controller_name == 'registrations' %>
+      <%= render 'layouts/search_bar' %>
     <% end %>
-  </div>
-
-<div class="search-bar">
-  <h2 class="title is-3">Search Products</h2>
-  <%= form_with url: search_products_path, method: :get, local: true do %>
-    <div class="field">
-      <div class="control">
-        <%= text_field_tag :keyword, params[:keyword], placeholder: "Search by product name or description...", class: 'input' %>
-      </div>
-    </div>
-
-    <div class="field">
-      <div class="control">
-        <%= select_tag :category_id, options_from_collection_for_select(@categories || [], :id, :name, params[:category_id]), include_blank: "All Categories", class: 'select' %>
-      </div>
-    </div>
-
-    <div class="field">
-      <div class="control">
-        <%= submit_tag "Search", class: 'button is-info' %>
-      </div>
-    </div>
-  <% end %>
-</div>
-
 
 
     <!-- Main Content Section -->
     <section class="section is-flex-grow-1 has-background-success-light">
-  <div class="container">
-    <%= yield %>
-  </div>
-</section>
-
-
-
-    <!-- Footer Section -->
-    <footer class="section has-background-light">
-      <div class="container has-text-centered">
-        <p>© 2024 Prairie Plants. All rights reserved.</p>
+      <div class="container">
+        <%= yield %>
       </div>
-    </footer>
+    </section>
+
+    <!-- Footer Partial -->
+    <%= render 'layouts/footer' %>
 
     <!-- Bulma JS (for burger menu toggle) -->
     <script>
