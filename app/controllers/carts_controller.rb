@@ -23,7 +23,8 @@ class CartsController < ApplicationController
     new_quantity = params[:quantity].to_i
     if new_quantity >= 1
       session[:cart][product_id] = new_quantity
-      redirect_to carts_path, notice: "Quantity for #{Product.find(product_id).name} has been updated."
+      redirect_to carts_path,
+notice: "Quantity for #{Product.find(product_id).name} has been updated."
     else
       redirect_to carts_path, alert: "Quantity must be 1 or more."
     end
@@ -37,7 +38,8 @@ class CartsController < ApplicationController
     if product && session[:cart].delete(product_id)
       flash[:notice] = "#{product.name} was removed from the cart."
     else
-      flash[:alert] = product ? "Failed to remove #{product.name} from the cart." : "Product not found."
+      flash[:alert] =
+product ? "Failed to remove #{product.name} from the cart." : "Product not found."
     end
     redirect_to carts_path
   end

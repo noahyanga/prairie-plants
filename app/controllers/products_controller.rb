@@ -84,5 +84,4 @@ end
   def initialize_cart
     session[:cart] ||= {}
   end
-
 end

@@ -1,0 +1,27 @@
+<div class="container mt-5">
+  <h1 class="title is-1 has-text-centered"><%= product.name %></h1>
+  
+  <div class="columns mt-4">
+    <div class="column is-half">
+      <h3 class="is-size-3">Price: $<%= product.price %></h3>
+      <p><%= product.description %></p>
+
+      <% if product.categories.any? %>
+        <p><strong>Categories:</strong> 
+          <%= product.categories.map { |category| link_to category.name, category_path(category) }.join(", ").html_safe %>
+        </p>
+      <% end %>
+
+      <!-- Add to Cart Button -->
+      <%= button_to "Add to Cart", add_product_carts_path(product), method: :post, class: "button is-success mt-3" %>
+
+      <% if product.categories.any? %>
+        <a href="<%= category_path(product.categories.first) %>" class="button is-primary mt-3">
+          Back to <%= product.categories.first.name %>
+        </a>
+      <% else %>
+        <a href="<%= products_path %>" class="button is-light mt-3">Back to All Products</a>
+      <% end %>
+    </div>
+  </div>
+</div>
