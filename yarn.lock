@@ -4,5 +4,5 @@
 
 bulma@^1.0.2:
   version "1.0.2"
-  resolved "https://registry.yarnpkg.com/bulma/-/bulma-1.0.2.tgz#47395a660755c9566db3cf981fd4e3a2b637af19"
+  resolved "https://registry.npmjs.org/bulma/-/bulma-1.0.2.tgz"
   integrity sha512-D7GnDuF6seb6HkcnRMM9E739QpEY9chDzzeFrHMyEns/EXyDJuQ0XA0KxbBl/B2NTsKSoDomW61jFGFaAxhK5A==
