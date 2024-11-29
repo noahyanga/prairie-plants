@@ -1,5 +1,5 @@
 <head>
-  <title>Prairie Plants - Home</title>
+  <title>Prairie Plants - <%= @product.name %></title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
@@ -18,10 +18,21 @@
       <p><%= @product.description %></p>
 
       <% if @product.categories.any? %>
-        <p><strong>Categories:</strong> <%= @product.categories.map(&:name).join(", ") %></p>
+        <p><strong>Categories:</strong> 
+          <%= @product.categories.map { |category| link_to category.name, category_path(category) }.join(", ").html_safe %>
+        </p>
       <% end %>
 
-      <a href="<%= category_path(@product.categories.first) %>" class="button is-primary mt-3">Back to <%= @product.categories.first.name %></a>
+      <!-- Add to Cart Button -->
+      <%= button_to "Add to Cart", add_product_carts_path(@product), method: :post, class: "button is-success mt-3" %>
+
+      <% if @product.categories.any? %>
+        <a href="<%= category_path(@product.categories.first) %>" class="button is-primary mt-3">
+          Back to <%= @product.categories.first.name %>
+        </a>
+      <% else %>
+        <a href="<%= products_path %>" class="button is-light mt-3">Back to All Products</a>
+      <% end %>
     </div>
   </div>
 </div>

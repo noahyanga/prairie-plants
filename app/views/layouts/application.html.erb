@@ -46,6 +46,14 @@
       </div>
     </nav>
 
+      <div class="container mt-4">
+    <% flash.each do |key, message| %>
+      <div class="notification is-<%= key == 'notice' ? 'success' : 'danger' %>">
+        <%= message %>
+      </div>
+    <% end %>
+  </div>
+
 <div class="search-bar">
   <h2 class="title is-3">Search Products</h2>
   <%= form_with url: search_products_path, method: :get, local: true do %>
@@ -57,7 +65,7 @@
 
     <div class="field">
       <div class="control">
-        <%= select_tag :category_id, options_from_collection_for_select(@categories, :id, :name, params[:category_id]), include_blank: "All Categories", class: 'select' %>
+        <%= select_tag :category_id, options_from_collection_for_select(@categories || [], :id, :name, params[:category_id]), include_blank: "All Categories", class: 'select' %>
       </div>
     </div>
 

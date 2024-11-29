@@ -1,0 +1,30 @@
+<head>
+  <title>Prairie Plants - Cart</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+
+  <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" rel="stylesheet">
+</head>
+<h1 class="title">Your Shopping Cart</h1>
+
+<% if @products.any? %>
+  <ul>
+    <% @products.each do |product| %>
+      <% quantity = @cart[product.id.to_s] || 1 %> <!-- Use @cart instead of session -->
+      <%= render partial: 'product_item', locals: { product: product, quantity: quantity } %>
+    <% end %>
+  </ul>
+
+  <!-- Total Price -->
+  <h2 class="subtitle">
+    Total Price: $<%= @total_price %>
+  </h2>
+
+  <!-- Empty link for Checkout -->
+  <a href="#" class="button is-primary">Checkout</a>
+<% else %>
+  <p>Your cart is empty.</p>
+<% end %>

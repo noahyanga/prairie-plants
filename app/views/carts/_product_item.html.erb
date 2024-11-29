@@ -1,0 +1,16 @@
+<li class="box">
+  <strong><%= product.name %></strong> - $<%= product.price %> each
+  <br>
+  Quantity: <%= quantity %>
+  <br>
+  Subtotal: $<%= (product.price * quantity).round(2) %> <!-- Round to two decimal places -->
+
+  <!-- Form to update quantity -->
+  <%= form_with(url: update_quantity_carts_path(id: product.id), method: :patch, local: true) do |form| %>
+    <%= form.number_field :quantity, value: quantity, min: 1, step: 1, class: "input is-small" %>
+    <%= form.submit 'Update Quantity', class: "button is-info is-small" %>
+  <% end %>
+
+  <!-- Button to remove the product -->
+  <%= button_to 'Remove', remove_product_carts_path(id: product.id), method: :delete, class: "button is-danger is-small" %>
+</li>
