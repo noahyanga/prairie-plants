@@ -19,12 +19,47 @@
 <h1 class="title"><%= @category.name %></h1>
 <p><%= @category.description %></p>
 
+<!-- Filter and Search Form -->
+<form action="<%= category_path(@category) %>" method="get" class="box mb-4">
+  <div class="columns">
+    <div class="column is-one-third">
+      <label class="label">Search</label>
+      <input
+        type="text"
+        name="keyword"
+        value="<%= params[:keyword] %>"
+        placeholder="Search products..."
+        class="input"
+      >
+    </div>
+    <div class="column is-one-third">
+      <label class="label">Filter</label>
+      <div class="select is-fullwidth">
+        <select name="filter">
+          <option value="" <%= 'selected' if params[:filter].blank? %>>All Products</option>
+          <option value="new" <%= 'selected' if params[:filter] == 'new' %>>New</option>
+          <option value="recently_updated" <%= 'selected' if params[:filter] == 'recently_updated' %>>Recently Updated</option>
+        </select>
+      </div>
+    </div>
+    <div class="column is-one-third is-flex is-align-items-end">
+      <button type="submit" class="button is-primary">Apply</button>
+    </div>
+  </div>
+</form>
+
+<!-- Display Products -->
 <div class="columns is-multiline">
-  <% @products.each do |product| %>
-    <%= render 'products/product_card', product: product %> 
+  <% if @products.any? %>
+    <% @products.each do |product| %>
+      <%= render 'products/product_card', product: product %> 
+    <% end %>
+  <% else %>
+    <p class="has-text-centered">No products match your criteria.</p>
   <% end %>
 </div>
 
+<!-- Pagination -->
 <div class="has-text-centered">
   <%= paginate @products %>
 </div>

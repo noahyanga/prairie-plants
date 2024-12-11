@@ -11,10 +11,11 @@ CATEGORY_URLS = {
 }
 
 # Clear existing data
-ProductCategory.delete_all
-Product.delete_all
-Category.delete_all
-Image.delete_all
+# ProductCategory.delete_all
+# Product.delete_all
+# Category.delete_all
+# Image.delete_all
+# Province.delete.all
 
 # Method to scrape data for a specific category
 def scrape_category(url, category_name)
@@ -60,10 +61,30 @@ price: plant_data[:price])
   end
 end
 
+provinces_data = [
+  { name: 'Alberta', pst_rate: 0.0, gst_rate: 0.05, hst_rate: 0.0 },
+  { name: 'British Columbia', pst_rate: 0.07, gst_rate: 0.05, hst_rate: 0.0 },
+  { name: 'Manitoba', pst_rate: 0.07, gst_rate: 0.05, hst_rate: 0.0 },
+  { name: 'New Brunswick', pst_rate: 0.0, gst_rate: 0.0, hst_rate: 0.15 },
+  { name: 'Newfoundland and Labrador', pst_rate: 0.0, gst_rate: 0.0, hst_rate: 0.15 },
+  { name: 'Northwest Territories', pst_rate: 0.0, gst_rate: 0.05, hst_rate: 0.0 },
+  { name: 'Nova Scotia', pst_rate: 0.0, gst_rate: 0.0, hst_rate: 0.15 },
+  { name: 'Nunavut', pst_rate: 0.0, gst_rate: 0.05, hst_rate: 0.0 },
+  { name: 'Ontario', pst_rate: 0.0, gst_rate: 0.0, hst_rate: 0.13 },
+  { name: 'Prince Edward Island', pst_rate: 0.0, gst_rate: 0.0, hst_rate: 0.15 },
+  { name: 'Quebec', pst_rate: 0.09975, gst_rate: 0.05, hst_rate: 0.0 },
+  { name: 'Saskatchewan', pst_rate: 0.06, gst_rate: 0.05, hst_rate: 0.0 },
+  { name: 'Yukon', pst_rate: 0.0, gst_rate: 0.05, hst_rate: 0.0 }
+]
+
+provinces_data.each do |province_data|
+  Province.create!(province_data)
+end
+
 puts "Seeding complete"
 
-AdminUser.create!(
-  email:                 'admin@example.com',
-  password:              'password',
-  password_confirmation: 'password'
-) if Rails.env.development?
+# AdminUser.create!(
+#   email:                 'admin@example.com',
+#   password:              'password',
+#   password_confirmation: 'password'
+# ) if Rails.env.development?

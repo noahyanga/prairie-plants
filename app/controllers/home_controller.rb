@@ -9,5 +9,7 @@ class HomeController < ApplicationController
      else
       @products = Product.all
      end
+
+     
   end
 end

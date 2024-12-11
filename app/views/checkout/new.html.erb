@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Prairie Plants - Checkout</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1 class="title">Invoice</h1>
+      <table class="table is-striped is-hoverable">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @products.each do |product| %>
+            <% quantity = @cart[product.id.to_s].to_i %>
+            <tr>
+              <td><%= product.name %></td>
+              <td><%= quantity %></td>
+              <td>$<%= product.price %></td>
+              <td>$<%= (product.price * quantity).round(2) %></td>
+            </tr>
+          <% end %>
+          <tr>
+            <td colspan="3"><strong>Total:</strong></td>
+            <td>$<%= @total_price.round(2) %></td>
+          </tr>
+          <% if @taxes.present? %>
+            <tr>
+              <td colspan="3"><strong>PST:</strong></td>
+              <td>$<%= @taxes[:pst] %></td>
+            </tr>
+            <tr>
+              <td colspan="3"><strong>GST:</strong></td>
+              <td>$<%= @taxes[:gst] %></td>
+            </tr>
+            <tr>
+              <td colspan="3"><strong>HST:</strong></td>
+              <td>$<%= @taxes[:hst] %></td>
+            </tr>
+            <tr>
+              <td colspan="3"><strong>Total Taxes:</strong></td>
+              <td>$<%= @taxes[:total_taxes] %></td>
+            </tr>
+            <tr>
+              <td colspan="3"><strong>Grand Total:</strong></td>
+              <td>$<%= @taxes[:grand_total] %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <!-- Province Selection and Tax Recalculation -->
+      <div class="box">
+        <%= form_with url: checkout_new_path, method: :get, local: true do %>
+          <div class="field">
+            <label for="province" class="label">Select Province:</label>
+            <div class="control">
+              <div class="select">
+                <select name="province" id="province">
+                  <% Province.all.each do |province| %>
+                    <option value="<%= province.id %>" <%= params[:province] == province.id.to_s ? "selected" : "" %>>
+                      <%= province.name %>
+                    </option>
+                  <% end %>
+                </select>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="button is-primary mt-2">Recalculate Taxes</button>
+        <% end %>
+      </div>
+
+      <!-- Final Confirmation Form -->
+      <div class="box">
+        <%= form_with url: checkout_path, method: :post, local: true do %>
+          <div class="field">
+            <label for="address" class="label">Shipping Address:</label>
+            <div class="control">
+              <textarea name="address" id="address" class="textarea" placeholder="Enter your shipping address" required></textarea>
+            </div>
+          </div>
+          <input type="hidden" name="province" value="<%= params[:province] %>">
+          <button type="submit" class="button is-success mt-2">Confirm Order</button>
+        <% end %>
+      </div>
+    </div>
+  </body>
+</html>

@@ -23,8 +23,8 @@
     Total Price: $<%= @total_price %>
   </h2>
 
-  <!-- Empty link for Checkout -->
-  <a href="#" class="button is-primary">Checkout</a>
+  <!-- Checkout Link -->
+  <%= link_to 'Proceed to Checkout', checkout_new_path, class: 'button is-primary' %>
 <% else %>
   <p>Your cart is empty.</p>
 <% end %>

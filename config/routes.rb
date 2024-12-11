@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get "checkout/new"
+  get "checkout/create"
+  get 'order_confirmation/:id', to: 'orders#confirmation', as: 'order_confirmation'
   # Health check route
   get "up" => "rails/health#show", as: :rails_health_check
 
@@ -28,6 +31,9 @@ Rails.application.routes.draw do
       get :search
     end
   end
+
+  # Checkout Routes
+  resources :checkout, only: [:new, :create] 
 
   # Cart routes
   resources :carts, only: [:index] do
