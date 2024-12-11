@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+  get "pages/show"
   get "checkout/new"
   get "checkout/create"
   get 'order_confirmation/:id', to: 'orders#confirmation', as: 'order_confirmation'
+
+  get 'contact', to: 'pages#show', id: 'contact', as: :contact
   # Health check route
   get "up" => "rails/health#show", as: :rails_health_check
 
@@ -24,6 +27,15 @@ Rails.application.routes.draw do
       get :search
     end
   end
+
+  # About page
+  resources :pages, only: [:show] do
+    collection do
+      get '/about', to: 'pages#show', id: 'about', as: :about_page
+    end
+  end
+
+
 
   # Categories routes
   resources :categories, only: [:index, :show] do

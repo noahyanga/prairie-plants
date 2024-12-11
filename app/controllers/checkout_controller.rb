@@ -56,9 +56,9 @@ class CheckoutController < ApplicationController
     grand_total = total_price + total_taxes
 
     {
-      pst: pst.round(2),
-      gst: gst.round(2),
-      hst: hst.round(2),
+      pst:         pst.round(2),
+      gst:         gst.round(2),
+      hst:         hst.round(2),
       total_taxes: total_taxes.round(2),
       grand_total: grand_total.round(2)
     }

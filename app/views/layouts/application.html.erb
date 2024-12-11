@@ -43,7 +43,7 @@
 
 
     <!-- Conditionally Render Search Bar -->
-    <% unless controller_name == 'sessions' || controller_name == 'registrations' %>
+    <% unless controller_name == 'sessions' || controller_name == 'registrations' || controller_name == 'pages' %>
       <%= render 'layouts/search_bar' %>
     <% end %>
 
