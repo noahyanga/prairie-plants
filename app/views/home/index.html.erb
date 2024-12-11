@@ -52,6 +52,15 @@
             <div class="column is-one-third">
               <div class="card custom-card">
                 <div class="card-content">
+                        <% if product.image.present? %>
+        <div class="product-image has-text-centered mb-4" style="float: left;">
+          <%= image_tag product.image.url(), alt: product.name, class: "image" , style: "margin-left: -10%;" %>
+        </div>
+      <% else %>
+        <div class="product-image has-text-centered mb-4">
+          <p>No image available</p>
+        </div>
+      <% end %>
                   <h5 class="title is-5"><%= product.name %></h5>
                   <p class="subtitle is-6">Price: $<%= product.price %></p>
                   <p class="content"><%= truncate(product.description, length: 80) %></p>

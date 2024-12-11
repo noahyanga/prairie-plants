@@ -83,7 +83,7 @@
 
       <!-- Final Confirmation Form -->
       <div class="box">
-        <%= form_with url: checkout_path, method: :post, local: true do %>
+        <%= form_with url: checkout_new_path, method: :post, local: true do %>
           <div class="field">
             <label for="address" class="label">Shipping Address:</label>
             <div class="control">
@@ -91,7 +91,7 @@
             </div>
           </div>
           <input type="hidden" name="province" value="<%= params[:province] %>">
-          <button type="submit" class="button is-success mt-2">Confirm Order</button>
+          <button type="submit" class="button is-success mt-2">Proceed to Payment</button>
         <% end %>
       </div>
     </div>

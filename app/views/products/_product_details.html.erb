@@ -9,11 +9,11 @@
   <h1 class="title is-1 has-text-centered"><%= product.name %></h1>
   
   <div class="columns mt-4">
-    <div class="column is-half">
+    <div class="column">
       <!-- Product Image -->
       <% if product.image.present? %>
-        <div class="product-image has-text-centered mb-4">
-          <%= image_tag product.image.url(), alt: product.name, class: "image" %>
+        <div class="product-image has-text-centered mb-4" style="float: left;">
+          <%= image_tag product.image.url(), alt: product.name, class: "image" , style: "margin-left: -10%;" %>
         </div>
       <% else %>
         <div class="product-image has-text-centered mb-4">
