@@ -1,11 +1,11 @@
 class Product < ApplicationRecord
-  has_many :images
+  mount_uploader :image, ImageUploader
+
   has_many :product_categories
   has_many :categories, through: :product_categories, dependent: :destroy
   has_many :order_products
   has_many :orders, through: :order_products
 
-  accepts_nested_attributes_for :images, allow_destroy: true
   validates :name, presence: true
   validates :description, presence: true
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }

@@ -10,6 +10,17 @@
   
   <div class="columns mt-4">
     <div class="column is-half">
+      <!-- Product Image -->
+      <% if product.image.present? %>
+        <div class="product-image has-text-centered mb-4">
+          <%= image_tag product.image.url(), alt: product.name, class: "image" %>
+        </div>
+      <% else %>
+        <div class="product-image has-text-centered mb-4">
+          <p>No image available</p>
+        </div>
+      <% end %>
+
       <h3 class="is-size-3">Price: $<%= product.price %></h3>
       <p><%= product.description %></p>
 

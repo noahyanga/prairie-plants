@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_11_004931) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_11_182925) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -87,6 +87,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_11_004931) do
     t.string "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "file"
     t.index ["product_id"], name: "index_images_on_product_id"
   end
 
@@ -132,6 +133,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_11_004931) do
     t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image"
   end
 
   create_table "provinces", force: :cascade do |t|

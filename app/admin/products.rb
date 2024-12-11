@@ -1,5 +1,5 @@
 ActiveAdmin.register Product do
-  permit_params :created_at, :updated_at, :name, :description, :price, category_ids: [], images_attributes: [:id, :image_url, :_destroy]
+  permit_params :created_at, :updated_at, :name, :description, :price, :image, category_ids: []
 
   # Index page
   index do
@@ -26,8 +26,12 @@ ActiveAdmin.register Product do
       end
       row :created_at
       row :updated_at
-      row :images do |product|
-        product.images.map { |img| image_tag(img.image_url.presence, size: "200x200") }.join.html_safe
+      row :image do |product|
+        if product.image.present?
+          image_tag product.image.url(), size: "400x400"
+        else
+          "No image available"
+        end
       end
     end
   end
@@ -39,10 +43,7 @@ ActiveAdmin.register Product do
       f.input :description
       f.input :price
       f.input :categories, as: :select, multiple: true, collection: Category.all
-      f.has_many :images, allow_destroy: true, new_record: true do |i|
-        i.input :image_url, as: :file
-      end
-      # Use datetime_select for created_at and updated_at
+      f.input :image, as: :file # File upload for image
       f.input :created_at, as: :datetime_select
       f.input :updated_at, as: :datetime_select
     end
