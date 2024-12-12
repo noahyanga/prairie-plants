@@ -44,7 +44,7 @@ gem 'sassc-rails'
 gem 'google-cloud-storage'
 
 # Carrierwave
-gem 'carrierwave', '~> 2.0'
+gem 'carrierwave', '~> 3.0'
 
 # mini_magick
 gem 'mini_magick', '~> 4.11'
