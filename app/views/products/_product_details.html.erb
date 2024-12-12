@@ -30,8 +30,12 @@
         </p>
       <% end %>
 
-      <!-- Add to Cart Button -->
-      <%= button_to "Add to Cart", add_product_carts_path(product), method: :post, class: "button is-success mt-3" %>
+    <!-- Add to Cart Button -->
+    <%= form_with url: add_product_carts_path(product), method: :post, authenticity_token: false do |form| %>
+      <%= tag(:input, type: 'hidden', name: 'authenticity_token', value: form_authenticity_token) %>
+      <button type="submit" class="button is-success mt-3">Add to Cart</button>
+    <% end %>
+
 
       <% if product.categories.any? %>
         <a href="<%= category_path(product.categories.first) %>" class="button is-primary mt-3">

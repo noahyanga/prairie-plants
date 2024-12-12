@@ -137,6 +137,10 @@ GEM
       warden (~> 1.2.3)
     digest-crc (0.6.5)
       rake (>= 12.0.0, < 14.0.0)
+    dotenv (3.1.4)
+    dotenv-rails (3.1.4)
+      dotenv (= 3.1.4)
+      railties (>= 6.1)
     drb (2.2.1)
     erubi (1.13.0)
     execjs (2.10.0)
@@ -450,6 +454,7 @@ DEPENDENCIES
   carrierwave (~> 2.0)
   debug
   devise
+  dotenv-rails
   google-cloud-storage
   httparty
   importmap-rails

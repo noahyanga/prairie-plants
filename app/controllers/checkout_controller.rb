@@ -18,30 +18,43 @@ class CheckoutController < ApplicationController
     @products = Product.where(id: @cart.keys)
     @total_price = @products.sum { |product| product.price * @cart[product.id.to_s] }
 
-    # Retrieve the province for tax calculation
-    @province = Province.find(params[:province])
-    @taxes = calculate_taxes(@province, @total_price)
-
-    # Create a customer record
-    @customer = Customer.create(address: params[:address], province: @province)
-
-    # Calculate grand total with taxes
-    grand_total = @taxes[:grand_total]
-
-    # Create an order for the customer
-    @order = @customer.orders.create(total_price: grand_total)
-
-    # Associate each product with the order
-    @products.each do |product|
-      quantity = @cart[product.id.to_s]
-      @order.order_items.create(product: product, quantity: quantity, price: product.price)
+    line_items = @products.map do |product|
+      {
+        price_data: {
+          currency:     "cad",
+          product_data: {
+            name:        product.name,
+            description: product.description
+          },
+          unit_amount:  (product.price * 100).to_i # Stripe expects amount in cents
+        },
+        quantity:   @cart[product.id.to_s]
+      }
     end
 
-    # Clear the cart after order creation
-    session[:cart] = {}
+    # Establish connection with Stripe
+    session = Stripe::Checkout::Session.create(
+      payment_method_types: [ "card" ],
+      success_url:          checkout_success_url,
+      cancel_url:           checkout_cancel_url,
+      mode:                 "payment",
+      line_items:           line_items
+    )
 
-    # Redirect to a confirmation or success page
-    redirect_to order_confirmation_path(@order)
+    # Save the session ID in the session
+    session[:stripe_session_id] = session.id # for success and cancel actions
+
+    # Create an order and save the Stripe payment ID
+    @order = Order.create(
+      user:       current_user,
+      total:      @total_price,
+      payment_id: session.id
+    )
+
+    # Save the order ID in the session for the success action
+    session[:order_id] = @order.id
+
+    redirect_to session.url, allow_other_host: true
   end
 
   private
@@ -65,10 +78,10 @@ class CheckoutController < ApplicationController
   end
 
   def success
-
+    # Handle successful payment
   end
 
   def cancel
-    
+    # Handle canceled payment
   end
 end

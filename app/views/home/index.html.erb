@@ -1,87 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Prairie Plants - Home</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+<!-- Header Section -->
+<header class="hero is-primary">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title">Welcome to Prairie Plants</h1>
+      <h2 class="subtitle">Bringing nature closer to your home.</h2>
+      <a href="<%= categories_path %>" class="button is-large is-link">Shop Now</a>
+    </div>
+  </div>
+</header>
 
-    <!-- Bulma CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" rel="stylesheet">
-  </head>
-  <body>
-    <!-- Header Section -->
-    <header class="hero is-primary">
-      <div class="hero-body">
-        <div class="container has-text-centered">
-          <h1 class="title">Welcome to Prairie Plants</h1>
-          <h2 class="subtitle">Bringing nature closer to your home.</h2>
-          <a href="<%= categories_path %>" class="button is-large is-link">Shop Now</a>
-        </div>
-      </div>
-    </header>
-
-    <!-- Featured Categories Section -->
-    <section class="section">
-      <div class="container">
-        <h2 class="title has-text-centered">Our Featured Plant Categories</h2>
-        <div class="columns is-multiline">
-          <% @categories.each do |category| %>
-            <div class="column is-one-third">
-              <div class="card">
-                <div class="card-content">
-                  <h3 class="title is-4"><%= category.name %></h3>
-                  <p class="content"><%= category.description %></p>
-                  <a href="<%= category_path(category) %>" class="button is-link is-small">Explore</a>
-                </div>
-              </div>
+<!-- Featured Categories Section -->
+<section class="section">
+  <div class="container">
+    <h2 class="title has-text-centered">Our Featured Plant Categories</h2>
+    <div class="columns is-multiline">
+      <% @categories.each do |category| %>
+        <div class="column is-one-third">
+          <div class="card">
+            <div class="card-content">
+              <h3 class="title is-4"><%= category.name %></h3>
+              <p class="content"><%= category.description %></p>
+              <a href="<%= category_path(category) %>" class="button is-link is-small">Explore</a>
             </div>
-          <% end %>
-        </div>
-      </div>
-    </section>
-
-    <!-- Featured Products Section -->
-    <section class="section has-background-light">
-      <div class="container">
-        <h2 class="title has-text-centered">Our Top Products</h2>
-        <div class="columns is-multiline">
-          <% @products.limit(6).each do |product| %>
-            <div class="column is-one-third">
-              <div class="card custom-card">
-                <div class="card-content">
-                        <% if product.image.present? %>
-        <div class="product-image has-text-centered mb-4" style="float: left;">
-          <%= image_tag product.image.url(), alt: product.name, class: "image" , style: "margin-left: -10%;" %>
-        </div>
-      <% else %>
-        <div class="product-image has-text-centered mb-4">
-          <p>No image available</p>
+          </div>
         </div>
       <% end %>
-                  <h5 class="title is-5"><%= product.name %></h5>
-                  <p class="subtitle is-6">Price: $<%= product.price %></p>
-                  <p class="content"><%= truncate(product.description, length: 80) %></p>
-                  <a href="<%= product_path(product) %>" class="button is-link is-small">View Details</a>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Products Section -->
+<section class="section has-background-light">
+  <div class="container">
+    <h2 class="title has-text-centered">Our Top Products</h2>
+    <div class="columns is-multiline">
+      <% @products.limit(6).each do |product| %>
+        <div class="column is-one-third">
+          <div class="card custom-card">
+            <div class="card-content">
+              <% if product.image.present? %>
+                <div class="product-image has-text-centered mb-4">
+                  <%= image_tag product.image.url, alt: product.name, class: "image" %>
                 </div>
-              </div>
+              <% else %>
+                <div class="product-image has-text-centered mb-4">
+                  <p>No image available</p>
+                </div>
+              <% end %>
+              <h5 class="title is-5"><%= product.name %></h5>
+              <p class="subtitle is-6">Price: $<%= product.price %></p>
+              <p class="content"><%= truncate(product.description, length: 80) %></p>
+              <a href="<%= product_path(product) %>" class="button is-link is-small">View Details</a>
             </div>
-          <% end %>
+          </div>
         </div>
-      </div>
-    </section>
+      <% end %>
+    </div>
+  </div>
+</section>
 
-
-    <!-- About Us Section -->
-    <section class="section">
-      <div class="container has-text-centered">
-        <h2 class="title">About Prairie Plants</h2>
-        <p class="content">We are passionate about bringing the beauty of plants into your home. Our wide selection of plants is perfect for every environment, from low-maintenance indoor plants to vibrant garden additions.</p>
-        <a href="<%= about_page_pages_path %>" class="button is-primary is-large">Learn More</a>
-        <a href="<%= contact_path %>" class="button is-primary is-large">Contact Us</a>
-      </div>
-    </section>
-  </body>
-</html>
+<!-- About Us Section -->
+<section class="section">
+  <div class="container has-text-centered">
+    <h2 class="title">About Prairie Plants</h2>
+    <p class="content">We are passionate about bringing the beauty of plants into your home. Our wide selection of plants is perfect for every environment, from low-maintenance indoor plants to vibrant garden additions.</p>
+    <a href="<%= about_page_pages_path %>" class="button is-primary is-large">Learn More</a>
+    <a href="<%= contact_path %>" class="button is-primary is-large">Contact Us</a>
+  </div>
+</section>

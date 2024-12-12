@@ -1,19 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div class="tabs is-boxed">
-  <ul>
-    <% @categories.each do |category| %>
-      <li><%= link_to category.name, category_path(category), class: "is-active" %></li>
-    <% end %>
-  </ul>
+<div class="columns is-multiline">
+  <% @categories.each do |category| %>
+    <div class="column is-one-third">
+      <div class="card">
+        <div class="card-content">
+          <h3 class="title is-4"><%= category.name %></h3>
+          <p class="content"><%= category.description %></p>
+          <a href="<%= category_path(category) %>" class="button is-link is-small">Explore</a>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
-
-    
-</body>
-</html>

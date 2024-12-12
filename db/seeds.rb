@@ -33,7 +33,8 @@ def scrape_category(url, category_name)
     image_url = product.at_css('.single-img img')&.[]('src') || '/placeholder.jpg'
     description = "A quality #{category_name.downcase} product."
 
-    products << { name: name, description: description, price: price, category_name: category_name, image_url: image_url }
+    products << { name: name, description: description, price: price, category_name: category_name,
+image_url: image_url }
   end
 
   products
@@ -44,7 +45,8 @@ puts "Seeding categories and products..."
 ActiveRecord::Base.transaction do
   # Create categories
   CATEGORY_URLS.each_key do |category_name|
-    Category.find_or_create_by!(name: category_name, description: "#{category_name} from Bloomscape.")
+    Category.find_or_create_by!(name:        category_name,
+                                description: "#{category_name} from Bloomscape.")
   end
 
   # Scrape and seed products
@@ -56,25 +58,25 @@ ActiveRecord::Base.transaction do
     plants_data.each do |plant_data|
       # Create product and associate it with the category
       product = Product.create!(
-        name: plant_data[:name],
+        name:        plant_data[:name],
         description: plant_data[:description],
-        price: plant_data[:price]
+        price:       plant_data[:price]
       )
 
-      # Download and save the image to the local uploads directory
+# Download and save the image to the local uploads directory
 if plant_data[:image_url] && plant_data[:image_url] != '/placeholder.jpg'
   image_url = plant_data[:image_url]
-  
+
   # Remove the query string from the URL (everything after ?)
   image_url_without_query = image_url.split('?').first
-  
+
   # Extract file extension from the image URL (after removing the query string)
   image_filename = File.basename(image_url_without_query)
   extension = File.extname(image_filename).downcase
-  
+
   # Check for valid image extensions before downloading
-  valid_extensions = ['.jpg', '.jpeg', '.png', '.gif']
-  
+  valid_extensions = [ '.jpg', '.jpeg', '.png', '.gif' ]
+
   if valid_extensions.include?(extension)
     image_path = Rails.root.join('public', 'uploads', 'products', image_filename)
 
@@ -127,8 +129,8 @@ end
 # Create admin user
 puts "Creating admin user..."
 AdminUser.create!(
-  email: ENV.fetch('ADMIN_EMAIL', 'admin@example.com'),
-  password: ENV.fetch('ADMIN_PASSWORD', 'password'),
+  email:                 ENV.fetch('ADMIN_EMAIL', 'admin@example.com'),
+  password:              ENV.fetch('ADMIN_PASSWORD', 'password'),
   password_confirmation: ENV.fetch('ADMIN_PASSWORD', 'password')
 ) if Rails.env.development?
 

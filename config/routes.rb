@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   get "pages/show"
   get "checkout/new"
-  get "checkout/create"
   get 'order_confirmation/:id', to: 'orders#confirmation', as: 'order_confirmation'
 
   get 'contact', to: 'pages#show', id: 'contact', as: :contact
@@ -46,6 +45,12 @@ Rails.application.routes.draw do
 
   # Checkout Routes
   resources :checkout, only: [:new, :create] 
+  scope '/checkout' do
+    post 'create', to: "checkout#create", as: :checkout_create
+    get 'success', to: 'checkout#success', as: :checkout_success
+    get 'cancel', to: 'checkout#cancel', as: :checkout_cancel
+
+  end
 
   # Cart routes
   resources :carts, only: [:index] do

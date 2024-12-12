@@ -13,16 +13,11 @@
     <link rel="manifest" href="/manifest.json">
 
     <!-- Bulma CSS from CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" 
-          rel="stylesheet" 
-          integrity="sha384-q3C6zNQ3nA5qNlN2yKmlJ6uTTkFjh+n1g9cthxA7zGd9UQO3Lgk0vfMZ58z1qXTx" 
-          crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" rel="stylesheet">
 
     <!-- Custom Stylesheet -->
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <link rel="icon" href="<%= asset_path('/plant.ico') %>" type="image/x-icon">
-    <script>src"https://js.stripe.com/v3/"</script>
-
 
     <!-- Custom Head Content (if any) -->
     <%= yield :head %>
