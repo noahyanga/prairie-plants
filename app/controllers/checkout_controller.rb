@@ -63,4 +63,12 @@ class CheckoutController < ApplicationController
       grand_total: grand_total.round(2)
     }
   end
+
+  def success
+
+  end
+
+  def cancel
+    
+  end
 end

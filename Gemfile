@@ -49,6 +49,9 @@ gem 'carrierwave', '~> 2.0'
 # mini_magick
 gem 'mini_magick', '~> 4.11'
 
+# stripe
+gem 'stripe'
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
