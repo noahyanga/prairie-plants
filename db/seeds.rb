@@ -71,8 +71,8 @@ if plant_data[:image_url] && plant_data[:image_url] != '/placeholder.jpg'
   image_url_without_query = image_url.split('?').first
 
   # Extract file extension from the image URL (after removing the query string)
-  image_filename = File.basename(image_url_without_query)
-  extension = File.extname(image_filename).downcase
+  image_filename = URI.basename(image_url_without_query)
+  extension = URI.extname(image_filename).downcase
 
   # Check for valid image extensions before downloading
   valid_extensions = [ '.jpg', '.jpeg', '.png', '.gif' ]
@@ -84,12 +84,12 @@ if plant_data[:image_url] && plant_data[:image_url] != '/placeholder.jpg'
     FileUtils.mkdir_p(Rails.root.join('public', 'uploads', 'products'))
 
     # Download and save the image
-    File.open(image_path, 'wb') do |file|
+    URI.open(image_path, 'wb') do |file|
       file.write(URI.open(image_url).read)
     end
 
     # Attach the image to the product
-    product.image = File.open(image_path)
+    product.image = URI.open(image_path)
     product.save!
   else
     puts "Skipping invalid image: #{image_url}"
