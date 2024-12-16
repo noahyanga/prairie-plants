@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for prairie-plants-bold-night-7191 on 2024-12-16T12:31:39-06:00
+# fly.toml app configuration file generated for prairie-plants-bold-night-7191 on 2024-12-16T13:43:10-06:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -10,7 +10,7 @@ console_command = '/rails/bin/rails console'
 [build]
 
 [deploy]
-  release_command = "./bin/rails db:prepare"
+  release_command = './bin/rails db:prepare'
 
 [env]
   DATABASE_URL = 'sqlite3:///data/production.sqlite3'
