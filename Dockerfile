@@ -7,10 +7,10 @@ FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 # Set working directory
 WORKDIR /rails
 
-# Install base packages and PostgreSQL development libraries
+# Install base packages, PostgreSQL development libraries, and Node.js
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y \
-    curl libjemalloc2 libvips sqlite3 libpq-dev build-essential && \
+    curl libjemalloc2 libvips sqlite3 libpq-dev build-essential nodejs && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Set production environment
@@ -29,11 +29,17 @@ RUN bundle install && \
 # Copy the rest of the application code
 COPY . .
 
+# Fix permissions on rails binary
+RUN chmod +x ./bin/rails
+
 # Precompile assets for production
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
 # Expose port 3000
 EXPOSE 3000
+
+# Fix permissions on rails binary and docker-entrypoint
+RUN chmod +x ./bin/rails ./bin/docker-entrypoint
 
 # Set the entry point
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
