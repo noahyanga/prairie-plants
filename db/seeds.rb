@@ -96,8 +96,6 @@ if plant_data[:image_url] && plant_data[:image_url] != '/placeholder.jpg'
   end
 end
 
-
-
       # Associate product with category
       ProductCategory.create!(product: product, category: category)
     end
@@ -132,6 +130,6 @@ AdminUser.create!(
   email:                 ENV.fetch('ADMIN_EMAIL', 'admin@example.com'),
   password:              ENV.fetch('ADMIN_PASSWORD', 'password'),
   password_confirmation: ENV.fetch('ADMIN_PASSWORD', 'password')
-) if Rails.env.development?
+) if Rails.env.development? || Rails.env.production?
 
 puts "Seeding complete!"

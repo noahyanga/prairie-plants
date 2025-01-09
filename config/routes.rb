@@ -34,8 +34,6 @@ Rails.application.routes.draw do
     end
   end
 
-
-
   # Categories routes
   resources :categories, only: [:index, :show] do
     collection do
@@ -58,6 +56,7 @@ Rails.application.routes.draw do
       post 'add_product/:id', to: 'carts#add_product', as: 'add_product'       # Adding a product to the cart
       patch 'update_quantity/:id', to: 'carts#update_quantity', as: 'update_quantity' # Updating the quantity of a product
       delete 'remove_product/:id', to: 'carts#remove_from_cart', as: 'remove_product' # Removing a product from the cart
+      delete 'clear', to: 'carts#clear', as: 'clear_cart' # Clearing the entire cart
     end
   end
 

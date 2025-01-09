@@ -7,20 +7,22 @@
 
 <div class="container mt-5">
   <h1 class="title is-1 has-text-centered"><%= product.name %></h1>
-  
-  <div class="columns mt-4">
-    <div class="column">
+
+  <div class="columns is-multiline">
+    <div class="column is-12-mobile is-6-tablet is-6-desktop">
       <!-- Product Image -->
       <% if product.image.present? %>
-        <div class="product-image has-text-centered mb-4" style="float: left;">
-          <%= image_tag product.image.url(), alt: product.name, class: "image" , style: "margin-left: -10%;" %>
+        <div class="product-image has-text-centered mb-4">
+          <%= image_tag product.image.url(), alt: product.name, class: "image", style: "max-width: 100%; height: auto;" %>
         </div>
       <% else %>
         <div class="product-image has-text-centered mb-4">
           <p>No image available</p>
         </div>
       <% end %>
+    </div>
 
+    <div class="column is-12-mobile is-6-tablet is-6-desktop">
       <h3 class="is-size-3">Price: $<%= product.price %></h3>
       <p><%= product.description %></p>
 
@@ -30,12 +32,11 @@
         </p>
       <% end %>
 
-    <!-- Add to Cart Button -->
-    <%= form_with url: add_product_carts_path(product), method: :post, authenticity_token: false do |form| %>
-      <%= tag(:input, type: 'hidden', name: 'authenticity_token', value: form_authenticity_token) %>
-      <button type="submit" class="button is-success mt-3">Add to Cart</button>
-    <% end %>
-
+      <!-- Add to Cart Button -->
+      <%= form_with url: add_product_carts_path(product), method: :post, authenticity_token: false do |form| %>
+        <%= tag(:input, type: 'hidden', name: 'authenticity_token', value: form_authenticity_token) %>
+        <button type="submit" class="button is-success mt-3">Add to Cart</button>
+      <% end %>
 
       <% if product.categories.any? %>
         <a href="<%= category_path(product.categories.first) %>" class="button is-primary mt-3">

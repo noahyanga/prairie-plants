@@ -15,6 +15,12 @@
 
   <!-- Checkout Link -->
   <%= link_to 'Proceed to Checkout', checkout_new_path, class: 'button is-primary' %>
+
+  <!-- Clear Cart Button-->
+  <%= form_with(url: clear_cart_carts_path, method: :delete, local: true, authenticity_token: false) do %>
+  <%= tag(:input, type: 'hidden', name: 'authenticity_token', value: form_authenticity_token) %>
+  <button type="submit" class="button is-danger is-small">Clear Cart</button>
+<% end %>
 <% else %>
   <p>Your cart is empty.</p>
 <% end %>

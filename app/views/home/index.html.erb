@@ -2,25 +2,27 @@
 <header class="hero is-primary">
   <div class="hero-body">
     <div class="container has-text-centered">
-      <h1 class="title">Welcome to Prairie Plants</h1>
-      <h2 class="subtitle">Bringing nature closer to your home.</h2>
-      <a href="<%= categories_path %>" class="button is-large is-link">Shop Now</a>
+      <h1 class="title is-size-2-tablet is-size-3-mobile">Welcome to Prairie Plants</h1>
+      <h2 class="subtitle is-size-4-tablet is-size-5-mobile">Bringing nature closer to your home.</h2>
+      <a href="<%= categories_path %>" class="button is-large is-link is-fullwidth-mobile">Shop Now</a>
     </div>
   </div>
 </header>
 
+
+
 <!-- Featured Categories Section -->
-<section class="section">
-  <div class="container">
-    <h2 class="title has-text-centered">Our Featured Plant Categories</h2>
+<section class="section has-background-success-light">
+  <div class="container-is-boxed">
+    <h2 class="title has-text-centered is-size-3-tablet is-size-4-mobile">Our Featured Plant Categories</h2>
     <div class="columns is-multiline">
       <% @categories.each do |category| %>
-        <div class="column is-one-third">
-          <div class="card">
-            <div class="card-content">
-              <h3 class="title is-4"><%= category.name %></h3>
-              <p class="content"><%= category.description %></p>
-              <a href="<%= category_path(category) %>" class="button is-link is-small">Explore</a>
+        <div class="column is-one-third mb-4">
+          <div class="card custom-card" style="height: 100%;">
+            <div class="card-content" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+              <h3 class="title is-5 is-size-6-mobile"><%= category.name %></h3>
+              <p class="content is-size-6 is-size-7-mobile"><%= truncate(category.description, length: 100) %></p>
+              <%= link_to "Explore", category_path(category), class: "button is-link mt-3" %>
             </div>
           </div>
         </div>
@@ -30,27 +32,29 @@
 </section>
 
 <!-- Featured Products Section -->
-<section class="section has-background-light">
-  <div class="container">
+<section class="section has-background-success-light">
+  <div class="container-is-boxed">
     <h2 class="title has-text-centered">Our Top Products</h2>
     <div class="columns is-multiline">
       <% @products.limit(6).each do |product| %>
-        <div class="column is-one-third">
-          <div class="card custom-card">
-            <div class="card-content">
+        <div class="column is-one-third mb-4">
+          <div class="card custom-card" style="height: 100%;">
+            <div class="card-content" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
               <% if product.image.present? %>
                 <div class="product-image has-text-centered mb-4">
-                  <%= image_tag product.image.url, alt: product.name, class: "image" %>
+                  <%= image_tag product.image.url(), alt: product.name, class: "image is-128x128", style: "object-fit: cover; width: 100%; max-height: 200px;" %>
                 </div>
               <% else %>
                 <div class="product-image has-text-centered mb-4">
                   <p>No image available</p>
                 </div>
               <% end %>
-              <h5 class="title is-5"><%= product.name %></h5>
-              <p class="subtitle is-6">Price: $<%= product.price %></p>
-              <p class="content"><%= truncate(product.description, length: 80) %></p>
-              <a href="<%= product_path(product) %>" class="button is-link is-small">View Details</a>
+              <div>
+                <h5 class="title is-5"><%= product.name %></h5>
+                <p class="content"><%= truncate(product.description, length: 100) %></p>
+                <p><strong>Price:</strong> $<%= product.price %></p>
+              </div>
+              <%= link_to "View Details", product_path(product), class: "button is-primary mt-3" %>
             </div>
           </div>
         </div>
@@ -60,11 +64,15 @@
 </section>
 
 <!-- About Us Section -->
-<section class="section">
+<section class="section has-background-success-light">
   <div class="container has-text-centered">
-    <h2 class="title">About Prairie Plants</h2>
-    <p class="content">We are passionate about bringing the beauty of plants into your home. Our wide selection of plants is perfect for every environment, from low-maintenance indoor plants to vibrant garden additions.</p>
-    <a href="<%= about_page_pages_path %>" class="button is-primary is-large">Learn More</a>
-    <a href="<%= contact_path %>" class="button is-primary is-large">Contact Us</a>
+    <h2 class="title is-size-3-tablet is-size-4-mobile">About Prairie Plants</h2>
+    <p class="content is-size-6 is-size-7-mobile">
+      We are passionate about bringing the beauty of plants into your home. Our wide selection of plants is perfect for every environment, from low-maintenance indoor plants to vibrant garden additions.
+    </p>
+    <div class="buttons is-centered">
+      <a href="<%= about_page_pages_path %>" class="button is-primary is-large is-fullwidth-mobile">Learn More</a>
+      <a href="<%= contact_path %>" class="button is-primary is-large is-fullwidth-mobile">Contact Us</a>
+    </div>
   </div>
 </section>

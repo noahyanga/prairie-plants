@@ -11,13 +11,16 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.2].define(version: 2024_12_11_182925) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
     t.string "resource_type"
-    t.integer "resource_id"
+    t.bigint "resource_id"
     t.string "author_type"
-    t.integer "author_id"
+    t.bigint "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
@@ -29,7 +32,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_11_182925) do
     t.string "city"
     t.string "postal_code"
     t.string "street_address"
-    t.integer "province_id", null: false
+    t.bigint "province_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["province_id"], name: "index_addresses_on_province_id"
@@ -55,7 +58,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_11_182925) do
   end
 
   create_table "images", force: :cascade do |t|
-    t.integer "product_id", null: false
+    t.bigint "product_id", null: false
     t.string "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -64,8 +67,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_11_182925) do
   end
 
   create_table "order_products", force: :cascade do |t|
-    t.integer "order_id", null: false
-    t.integer "product_id", null: false
+    t.bigint "order_id", null: false
+    t.bigint "product_id", null: false
     t.integer "quantity"
     t.decimal "price_at_purchase"
     t.datetime "created_at", null: false
@@ -77,7 +80,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_11_182925) do
   create_table "orders", force: :cascade do |t|
     t.decimal "total"
     t.string "payment_id"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_orders_on_user_id"
@@ -91,8 +94,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_11_182925) do
   end
 
   create_table "product_categories", force: :cascade do |t|
-    t.integer "product_id", null: false
-    t.integer "category_id", null: false
+    t.bigint "product_id", null: false
+    t.bigint "category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_product_categories_on_category_id"
@@ -122,7 +125,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_11_182925) do
     t.string "password"
     t.string "email"
     t.string "role"
-    t.integer "address_id", null: false
+    t.bigint "address_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "encrypted_password", default: "", null: false

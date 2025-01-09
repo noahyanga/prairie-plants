@@ -43,4 +43,9 @@ product ? "Failed to remove #{product.name} from the cart." : "Product not found
     end
     redirect_to carts_path
   end
+
+  def clear
+    session[:cart] = {}
+    redirect_to carts_path, notice: "Your cart has been emptied."
+  end
 end
