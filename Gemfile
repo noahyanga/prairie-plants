@@ -43,6 +43,10 @@ gem 'sassc-rails'
 # Google cloud storage
 gem 'google-cloud-storage'
 
+# AWS
+gem 'aws-sdk-s3', require: false
+gem 'fog-aws'
+
 # Carrierwave
 gem 'carrierwave', '~> 3.0'
 
@@ -54,6 +58,7 @@ gem 'stripe'
 
 # dotenv
 gem 'dotenv-rails', groups: [:development, :test]
+
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
