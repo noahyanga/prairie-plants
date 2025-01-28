@@ -97,6 +97,7 @@ Rails.application.configure do
 
   config.assets.compile = true # This allows Rails to compile assets on the fly (not recommended for production)
   config.assets.digest = true  #
+  config.active_storage.service = :amazon
 
 
   # Enable DNS rebinding protection and other `Host` header attacks.

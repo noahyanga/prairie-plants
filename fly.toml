@@ -1,13 +1,16 @@
-# fly.toml app configuration file generated for exploreprairieplants on 2025-01-28T12:23:09-06:00
+# fly.toml app configuration file generated for prairie-plants-dark-breeze-5676 on 2025-01-28T16:47:20-06:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'exploreprairieplants'
+app = 'prairie-plants-dark-breeze-5676'
 primary_region = 'ord'
 console_command = '/rails/bin/rails console'
 
 [build]
+  [build.args]
+    RAILS_ENV = "production"
+    BUNDLE_WITHOUT = "development:test"
 
 [http_service]
   internal_port = 3000
@@ -33,3 +36,9 @@ console_command = '/rails/bin/rails console'
   memory = '512mb'
   cpu_kind = 'shared'
   cpus = 1
+
+[env]
+  AWS_REGION = "us-east-2"
+  S3_BUCKET_NAME = "prairieplants"
+  STRIPE_PUBLISHABLE_KEY = "pk_test_51QUz6cKk6iqXFcWtM5VayayFMzrFUZVzGsFIu3pdqC0IfRYDKFHCSUSnF4LfHLoViMc6cexttjhk7PjO4Kds9rKv006AQyft7Z"
+  RAILS_ENV = "production"
