@@ -1,19 +1,13 @@
-# fly.toml app configuration file generated for prairie-plants-bold-night-7191 on 2024-12-16T13:46:41-06:00
+# fly.toml app configuration file generated for exploreprairieplants on 2025-01-28T12:23:09-06:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'prairie-plants-bold-night-7191'
+app = 'exploreprairieplants'
 primary_region = 'ord'
 console_command = '/rails/bin/rails console'
 
 [build]
-
-[deploy]
-  release_command = './bin/rails db:prepare'
-
-[env]
-  DATABASE_URL = 'sqlite3:///data/production.sqlite3'
 
 [http_service]
   internal_port = 3000
@@ -23,10 +17,7 @@ console_command = '/rails/bin/rails console'
   min_machines_running = 0
   processes = ['app']
 
-[checks]
-  [checks.status]
-    port = 3000
-    type = 'http'
+  [[http_service.checks]]
     interval = '10s'
     timeout = '2s'
     grace_period = '5s'
@@ -35,14 +26,10 @@ console_command = '/rails/bin/rails console'
     protocol = 'http'
     tls_skip_verify = false
 
-    [checks.status.headers]
+    [http_service.checks.headers]
       X-Forwarded-Proto = 'https'
 
 [[vm]]
-  memory = '1gb'
+  memory = '512mb'
   cpu_kind = 'shared'
   cpus = 1
-
-[[statics]]
-  guest_path = '/rails/public'
-  url_prefix = '/'
