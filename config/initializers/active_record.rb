@@ -1,0 +1,1 @@
+Rails.application.config.active_record.sqlite3_production_warning = false
