@@ -9,8 +9,9 @@ console_command = '/rails/bin/rails console'
 
 [build]
   [build.args]
-    RAILS_ENV = "production"
     BUNDLE_WITHOUT = "development:test"
+    BUNDLE_DEPLOYMENT = "true"
+    BUNDLE_PATH = "/app/vendor/bundle"
 
 [http_service]
   internal_port = 3000
@@ -32,6 +33,11 @@ console_command = '/rails/bin/rails console'
     [http_service.checks.headers]
       X-Forwarded-Proto = 'https'
 
+    [[http_service.ports]]
+    handlers = ["http"]
+    port = 3000
+
+
 [[vm]]
   memory = '512mb'
   cpu_kind = 'shared'
@@ -42,3 +48,5 @@ console_command = '/rails/bin/rails console'
   S3_BUCKET_NAME = "prairieplants"
   STRIPE_PUBLISHABLE_KEY = "pk_test_51QUz6cKk6iqXFcWtM5VayayFMzrFUZVzGsFIu3pdqC0IfRYDKFHCSUSnF4LfHLoViMc6cexttjhk7PjO4Kds9rKv006AQyft7Z"
   RAILS_ENV = "production"
+  PORT = "3000"
+  BINDING = "0.0.0.0"
