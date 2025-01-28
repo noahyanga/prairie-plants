@@ -502,6 +502,7 @@ DEPENDENCIES
   rubocop-rails
   sassc-rails
   selenium-webdriver
+  sprockets (~> 4.0)
   sprockets-rails
   sqlite3 (>= 1.4)
   stimulus-rails

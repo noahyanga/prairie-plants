@@ -6,6 +6,7 @@ ruby '3.1.2'
 gem "rails", "~> 7.2.2"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
+gem 'sprockets', '~> 4.0'
 # Use sqlite3 as the database for Active Record
 # gem "sqlite3", ">= 1.4"
 # Use the Puma web server [https://github.com/puma/puma]
@@ -57,7 +58,7 @@ gem 'mini_magick', '~> 4.11'
 gem 'stripe'
 
 # dotenv
-gem 'dotenv-rails', groups: [:development, :test]
+gem 'dotenv-rails', groups: [:development, :test, :production]
 
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]

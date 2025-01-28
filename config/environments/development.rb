@@ -31,7 +31,7 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
-  # Store uploaded files on the local file system or use S3 based on environment
+  # Store uploaded files on the local fiLe system or use S3 based on environment
   if Rails.env.production?
     config.active_storage.service = :amazon
   else
@@ -64,6 +64,9 @@ Rails.application.configure do
 
   # Highlight code that enqueued background job in logs.
   config.active_job.verbose_enqueue_logs = true
+
+  config.assets.compile = true # This allows Rails to compile assets on the fly (not recommended for production)
+  config.assets.digest = true  # This adds a fingerprint to asset filenames for caching
 
   # Suppress logger output for asset requests.
   config.assets.quiet = true

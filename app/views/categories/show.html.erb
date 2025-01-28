@@ -6,12 +6,13 @@
 </nav>
 
 <h1 class="title"><%= @category.name %></h1>
-<p><%= @category.description %></p>
+<p class="is-size-5"><%= @category.description %></p>
 
 <!-- Filter and Search Form -->
-<form action="<%= category_path(@category) %>" method="get" class="box mb-4">
-  <div class="columns">
-    <div class="column is-one-third">
+<form id="search" action="<%= category_path(@category) %>" method="get" class="box mb-4">
+  <div class="columns is-multiline">
+    <!-- Search Field -->
+    <div class="column is-12-mobile is-4-tablet" >
       <label class="label">Search</label>
       <input
         type="text"
@@ -21,7 +22,9 @@
         class="input"
       >
     </div>
-    <div class="column is-one-third">
+
+    <!-- Filter Dropdown -->
+    <div class="column is-12-mobile is-4-tablet">
       <label class="label">Filter</label>
       <div class="select is-fullwidth">
         <select name="filter">
@@ -31,11 +34,15 @@
         </select>
       </div>
     </div>
-    <div class="column is-one-third is-flex is-align-items-end">
-      <button type="submit" class="button is-primary">Apply</button>
+
+    <!-- Apply Button -->
+    <div class="column is-12-mobile is-4-tablet is-flex is-align-items-end">
+      <button type="submit" class="button is-primary is-fullwidth">Apply</button>
     </div>
   </div>
 </form>
+
+
 
 <!-- Display Products -->
 <div class="columns is-multiline">

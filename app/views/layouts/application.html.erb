@@ -21,7 +21,6 @@
 
     <!-- Custom Head Content (if any) -->
     <%= yield :head %>
-
     <%= javascript_importmap_tags %>
   </head>
 
@@ -29,13 +28,7 @@
     <!-- Navbar Partial -->
     <%= render 'layouts/navbar' %>
 
-    <div class="container mt-4">
-      <% flash.each do |key, message| %>
-        <div class="notification is-<%= key == 'notice' ? 'success' : 'danger' %>">
-          <%= message %>
-        </div>
-      <% end %>
-    </div>
+
 
 
     <!-- Conditionally Render Search Bar -->
@@ -46,6 +39,13 @@
 
     <!-- Main Content Section -->
     <section class="section is-flex-grow-1 has-background-success-light">
+      <div class="container mt-4">
+        <% flash.each do |key, message| %>
+          <div class="is-size-5 notification is-<%= key == 'notice' ? 'success' : 'danger' %>">
+            <%= message %>
+      </div>
+      <% end %>
+    </div>
       <div class="container">
         <%= yield %>
       </div>

@@ -1,7 +1,21 @@
 <% if @page %>
   <section class="about-section">
-    <h2 class="page-title"><%= @page.title.capitalize %></h2> <!-- Changed to h2 for better accessibility -->
+    <h1 class="is-size-1"><%= @page.title.capitalize %></h2> <!-- Changed to h2 for better accessibility -->
     <br>
-    <div class="page-content-body"><%= raw @page.content %></div> <!-- raw allows HTML content to be rendered -->
+    <div class="is-size-3"><%= raw @page.content %></div> <!-- raw allows HTML content to be rendered -->
+  </section>
+<% else %>
+  <section class="about-section">
+    <h1 class="is-size-1">About Us</h2>
+    <br>
+    <div class="is-size-6">
+      <p>Welcome to Prairie Plants, your trusted partner in bringing nature’s beauty into your home and garden. Our mission is simple: to provide you with high-quality plants that transform spaces and bring joy into your life.</p>
+
+      <p>Whether you're a seasoned gardener or a plant enthusiast just beginning your green journey, we offer a wide selection to suit every need. From low-maintenance indoor plants that thrive in any home environment, to lush outdoor plants that add color and vibrancy to your garden, we have something for everyone. Our plants are carefully sourced, ensuring that they are healthy, vibrant, and ready to be enjoyed for years to come.</p>
+
+      <p>At Prairie Plants, we believe that plants do more than just add beauty to a space – they help improve air quality, boost mental health, and create a serene environment. With our easy-to-use online platform, you can explore, select, and order your favorite plants from the comfort of your home. Plus, our expert team is always here to offer advice on plant care, helping you nurture your green companions as they grow.</p>
+
+      <p>We are passionate about making the world a greener place, one plant at a time. Join us in our journey and discover the perfect plants to brighten your home and garden.</p>
+    </div>
   </section>
 <% end %>

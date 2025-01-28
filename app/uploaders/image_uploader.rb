@@ -3,6 +3,9 @@ class ImageUploader < CarrierWave::Uploader::Base
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
 
+  # include Sprockets::Helpers::RailsHelper
+  # include Sprockets::Helpers::IsolatedHelper
+
   # Choose what kind of storage to use for this uploader:
   if Rails.env.production?
     storage :fog # Use fog for S3 storage in production
@@ -12,7 +15,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Override the directory where uploaded files will be stored:
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    "uploads/product/image/#{model.id}"
   end
 
   # Process files as they are uploaded:

@@ -1,4 +1,4 @@
-<p class="mb-5">
+<p class="is-size-3 mb-5">
   Found <%= pluralize(@products.count, 'Product') %> when searching for: 
   "<%= params[:keyword].present? ? params[:keyword] : 'all products' %>"
   <% if @category.present? %> in <%= @category.name %> <% end %>

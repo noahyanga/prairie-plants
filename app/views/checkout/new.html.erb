@@ -1,52 +1,54 @@
 <div class="container mt-5">
   <h1 class="title">Invoice</h1>
-  <table class="table is-striped is-hoverable">
-    <thead>
-      <tr>
-        <th>Product</th>
-        <th>Quantity</th>
-        <th>Price</th>
-        <th>Subtotal</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @products.each do |product| %>
-        <% quantity = @cart[product.id.to_s].to_i %>
+  <div class="table-container">
+    <table class="table is-striped is-hoverable is-fullwidth">
+      <thead class="has-background-primary-light">
         <tr>
-          <td><%= product.name %></td>
-          <td><%= quantity %></td>
-          <td>$<%= product.price %></td>
-          <td>$<%= (product.price * quantity).round(2) %></td>
+          <th class="is-size-5">Product</th>
+          <th class="is-size-5">Quantity</th>
+          <th class="is-size-5">Price</th>
+          <th class="is-size-5">Subtotal</th>
         </tr>
-      <% end %>
-      <tr>
-        <td colspan="3"><strong>Total:</strong></td>
-        <td>$<%= @total_price.round(2) %></td>
-      </tr>
-      <% if @taxes.present? %>
-        <tr>
-          <td colspan="3"><strong>PST:</strong></td>
-          <td>$<%= @taxes[:pst] %></td>
+      </thead>
+      <tbody>
+        <% @products.each do |product| %>
+          <% quantity = @cart[product.id.to_s].to_i %>
+          <tr>
+            <td class="is-size-6"><%= product.name %></td>
+            <td class="is-size-6"><%= quantity %></td>
+            <td class="is-size-6">$<%= product.price %></td>
+            <td class="is-size-6">$<%= (product.price * quantity).round(2) %></td>
+          </tr>
+        <% end %>
+        <tr class="has-background-light">
+          <td colspan="3" class="has-text-right is-size-5"><strong>Total:</strong></td>
+          <td class="is-size-5"><strong>$<%= @total_price.round(2) %></strong></td>
         </tr>
-        <tr>
-          <td colspan="3"><strong>GST:</strong></td>
-          <td>$<%= @taxes[:gst] %></td>
-        </tr>
-        <tr>
-          <td colspan="3"><strong>HST:</strong></td>
-          <td>$<%= @taxes[:hst] %></td>
-        </tr>
-        <tr>
-          <td colspan="3"><strong>Total Taxes:</strong></td>
-          <td>$<%= @taxes[:total_taxes] %></td>
-        </tr>
-        <tr>
-          <td colspan="3"><strong>Grand Total:</strong></td>
-          <td>$<%= @taxes[:grand_total] %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+        <% if @taxes.present? %>
+          <tr>
+            <td colspan="3" class="has-text-right is-size-6"><strong>PST:</strong></td>
+            <td class="is-size-6">$<%= @taxes[:pst] %></td>
+          </tr>
+          <tr>
+            <td colspan="3" class="has-text-right is-size-6"><strong>GST:</strong></td>
+            <td class="is-size-6">$<%= @taxes[:gst] %></td>
+          </tr>
+          <tr>
+            <td colspan="3" class="has-text-right is-size-6"><strong>HST:</strong></td>
+            <td class="is-size-6">$<%= @taxes[:hst] %></td>
+          </tr>
+          <tr class="has-background-light">
+            <td colspan="3" class="has-text-right is-size-5"><strong>Total Taxes:</strong></td>
+            <td class="is-size-5"><strong>$<%= @taxes[:total_taxes] %></strong></td>
+          </tr>
+          <tr class="has-background-primary-light">
+            <td colspan="3" class="has-text-right is-size-4"><strong>Grand Total:</strong></td>
+            <td class="is-size-4"><strong>$<%= @taxes[:grand_total] %></strong></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
   <!-- Province Selection and Tax Recalculation -->
   <div class="box">

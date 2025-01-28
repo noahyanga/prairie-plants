@@ -1,49 +1,58 @@
-<!-- Display Breadcrumbs -->
-<nav class="breadcrumb" aria-label="breadcrumbs">
+<!-- Breadcrumb -->
+<nav class="breadcrumb is-size-7 has-succeeds-separator mt-5" aria-label="breadcrumbs">
   <ul>
-    <li><%= breadcrumbs %></li>
+    <li><a href="<%= root_path %>">Home</a></li>
+    <li><a href="<%= categories_path %>">Categories</a></li>
+    <li class="is-active"><a href="#" aria-current="page"><%= product.name %></a></li>
   </ul>
 </nav>
 
-<div class="container mt-5">
-  <h1 class="title is-1 has-text-centered"><%= product.name %></h1>
+<!-- Product Details -->
+<div class="container mt-6">
+  <!-- Product Name -->
+  <h1 class="title is-2 has-text-centered has-text-dark"><%= product.name %></h1>
 
-  <div class="columns is-multiline">
+  <div class="columns is-multiline mt-5">
+    <!-- Product Image -->
     <div class="column is-12-mobile is-6-tablet is-6-desktop">
-      <!-- Product Image -->
       <% if product.image.present? %>
-        <div class="product-image has-text-centered mb-4">
-          <%= image_tag product.image.url(), alt: product.name, class: "image", style: "max-width: 100%; height: auto;" %>
+        <div class="product-image has-text-centered">
+          <%= image_tag product.image.url, alt: product.name, class: "image is-rounded", style: "max-width: 100%; height: auto;" %>
         </div>
       <% else %>
-        <div class="product-image has-text-centered mb-4">
-          <p>No image available</p>
+        <div class="product-image has-text-centered">
+          <p class="has-text-grey-light">No image available</p>
         </div>
       <% end %>
     </div>
 
+    <!-- Product Details -->
     <div class="column is-12-mobile is-6-tablet is-6-desktop">
-      <h3 class="is-size-3">Price: $<%= product.price %></h3>
-      <p><%= product.description %></p>
+      <h3 class="is-size-3 has-text-dark mb-3">Price: $<%= product.price %></h3>
+      <p class="is-size-6 mb-4"><%= product.description %></p>
 
       <% if product.categories.any? %>
-        <p><strong>Categories:</strong> 
-          <%= product.categories.map { |category| link_to category.name, category_path(category) }.join(", ").html_safe %>
+        <p class="is-size-6 mb-4" style="list-style: none">
+          <strong>Category:</strong> 
+          <%= product.categories.map { |category| link_to category.name, category_path(category), class: "has-text-success" }.join(", ").html_safe %>
         </p>
       <% end %>
 
       <!-- Add to Cart Button -->
-      <%= form_with url: add_product_carts_path(product), method: :post, authenticity_token: false do |form| %>
+      <%= form_with url: add_product_carts_path(product), method: :post do |form| %>
         <%= tag(:input, type: 'hidden', name: 'authenticity_token', value: form_authenticity_token) %>
-        <button type="submit" class="button is-success mt-3">Add to Cart</button>
+        <button type="submit" class="button is-success is-size-5 is-fullwidth mb-3">Add to Cart</button>
       <% end %>
 
+      <!-- Back Button -->
       <% if product.categories.any? %>
-        <a href="<%= category_path(product.categories.first) %>" class="button is-primary mt-3">
+        <a href="<%= category_path(product.categories.first) %>" class="button is-large is-fullwidth h">
           Back to <%= product.categories.first.name %>
         </a>
       <% else %>
-        <a href="<%= products_path %>" class="button is-light mt-3">Back to All Products</a>
+        <a href="<%= products_path %>" class="button is-large is-fullwidth">
+          Back to All Products
+        </a>
       <% end %>
     </div>
   </div>

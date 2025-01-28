@@ -1,36 +1,34 @@
 <!-- app/views/layouts/_navbar.html.erb -->
-<nav class="navbar has-background-success">
-  <div class="navbar-brand">
-    <h1><a class="navbar-item" href="/">Prairie Plants</a></h1>
-    <button class="navbar-burger burger" data-target="navbarMenu" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </button>
-  </div>
+<nav class="navbar has-background-success is-spaced" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item is-size-3 has-text-weight-bold has-text-success-light" style="text-decoration: none;" href="/">
+        Prairie Plants 🪴
+      </a>
 
-  <div id="navbarMenu" class="navbar-menu">
-    <div class="navbar-start">
-      <a class="navbar-item" href="<%= root_path %>">Home</a>
-      <a class="navbar-item" href="<%= categories_path %>">Categories</a>
-      <a class="navbar-item" href="<%= carts_path %>">Cart</a>
+      <button class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
     </div>
-    <div class="navbar-end">
-      <% if user_signed_in? %>
-        <div class="navbar-item">
-          <p>Welcome, <%= current_user.name %>!</p>
-        </div>
-        <div class="navbar-item">
-          <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "button is-light" %>
-        </div>
-      <% else %>
-        <div class="navbar-item">
-          <%= link_to "Login", new_user_session_path, class: "button is-primary" %>
-        </div>
-        <div class="navbar-item">
-          <%= link_to "Sign Up", new_user_registration_path, class: "button is-primary" %>
-        </div>
-      <% end %>
+
+    <div id="navbarMenu" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item has-background-success is-size-5 has-text-success-light"  style="text-decoration: none;" href="<%= root_path %>">
+          Home
+        </a>
+        <a class="navbar-item has-background-success is-size-5 has-text-success-light"style="text-decoration: none;" h href="<%= categories_path %>">
+          Categories
+        </a>
+        <a class="navbar-item has-background-success is-size-5 has-text-success-light"style="text-decoration: none;" h href="<%= carts_path %>">
+          Cart
+        </a>
+      </div>
+
+      <div class="navbar-end">
+        <!-- Add buttons or user actions here if needed -->
+      </div>
     </div>
   </div>
 </nav>

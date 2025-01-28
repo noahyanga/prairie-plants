@@ -33,12 +33,9 @@ local:
 #   primary: local
 #   mirrors: [ amazon, google, microsoft ]
 
-amazon:
+  amazon:
   service: S3
   access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
   secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
   region: <%= ENV['AWS_REGION'] %>
   bucket: <%= ENV['S3_BUCKET_NAME'] %>
-  url: :amazon
-  path: :rails_root/public/system/:class/:attachment/:id/:style/:filename
-  storage_class: STANDARD

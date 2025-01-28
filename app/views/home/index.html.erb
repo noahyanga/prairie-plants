@@ -1,5 +1,5 @@
 <!-- Header Section -->
-<header class="hero is-primary">
+<header class="hero is-primary has-background-success">
   <div class="hero-body">
     <div class="container has-text-centered">
       <h1 class="title is-size-2-tablet is-size-3-mobile">Welcome to Prairie Plants</h1>
@@ -9,20 +9,18 @@
   </div>
 </header>
 
-
-
 <!-- Featured Categories Section -->
-<section class="section has-background-success-light">
-  <div class="container-is-boxed">
-    <h2 class="title has-text-centered is-size-3-tablet is-size-4-mobile">Our Featured Plant Categories</h2>
+<section id="categories" class="section has-background-primary-light py-6-mobile">
+  <div class="container has-text-centered">
+    <h2 class="title has-text-centered">Featured Plant Categories</h2>
     <div class="columns is-multiline">
       <% @categories.each do |category| %>
-        <div class="column is-one-third mb-4">
-          <div class="card custom-card" style="height: 100%;">
-            <div class="card-content" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
-              <h3 class="title is-5 is-size-6-mobile"><%= category.name %></h3>
-              <p class="content is-size-6 is-size-7-mobile"><%= truncate(category.description, length: 100) %></p>
-              <%= link_to "Explore", category_path(category), class: "button is-link mt-3" %>
+        <div class="column is-one-third is-full-mobile mb-4">
+          <div class="card custom-card">
+            <div class="card-content">
+              <h3 class="title is-5 is-size-3-mobile"><%= category.name %></h3>
+              <p class="content is-size-6 is-size-5-mobile"><%= truncate(category.description, length: 100) %></p>
+              <%= link_to "Explore", category_path(category), class: "button is-dark" %>
             </div>
           </div>
         </div>
@@ -32,27 +30,28 @@
 </section>
 
 <!-- Featured Products Section -->
-<section class="section has-background-success-light">
-  <div class="container-is-boxed">
-    <h2 class="title has-text-centered">Our Top Products</h2>
+<section id="products" class="section has-background-primary-light py-6-mobile">
+  <div class="container has-text-centered">
+    <h2 class="title has-text-centered">Top Products</h2>
     <div class="columns is-multiline">
       <% @products.limit(6).each do |product| %>
-        <div class="column is-one-third mb-4">
-          <div class="card custom-card" style="height: 100%;">
-            <div class="card-content" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+        <div class="column is-one-third is-full-mobile mb-4">
+          <div class="card custom-card">
+            <div class="card-content">
               <% if product.image.present? %>
                 <div class="product-image has-text-centered mb-4">
-                  <%= image_tag product.image.url(), alt: product.name, class: "image is-128x128", style: "object-fit: cover; width: 100%; max-height: 200px;" %>
+                  <%= image_tag product.image.url(), alt: product.name, class: "image is-150x150", style: "width: 100%; max-height: 300px;" %>
                 </div>
+
               <% else %>
                 <div class="product-image has-text-centered mb-4">
                   <p>No image available</p>
                 </div>
               <% end %>
               <div>
-                <h5 class="title is-5"><%= product.name %></h5>
-                <p class="content"><%= truncate(product.description, length: 100) %></p>
-                <p><strong>Price:</strong> $<%= product.price %></p>
+                <h5 class="title is-5 is-size-4-mobile"><%= product.name %></h5>
+                <p class="content is-size-5-mobile"><%= truncate(product.description, length: 100) %></p>
+                <p class="content is-size-6-mobile"><strong>Price:</strong> $<%= product.price %></p>
               </div>
               <%= link_to "View Details", product_path(product), class: "button is-primary mt-3" %>
             </div>
@@ -64,15 +63,14 @@
 </section>
 
 <!-- About Us Section -->
-<section class="section has-background-success-light">
+<section class="section has-background-primary-light py-6-mobile">
   <div class="container has-text-centered">
-    <h2 class="title is-size-3-tablet is-size-4-mobile">About Prairie Plants</h2>
-    <p class="content is-size-6 is-size-7-mobile">
+    <h2 class="title is-size-3-tablet is-size-3-mobile">About Prairie Plants</h2>
+    <p class="content is-size-6 is-size-5-mobile">
       We are passionate about bringing the beauty of plants into your home. Our wide selection of plants is perfect for every environment, from low-maintenance indoor plants to vibrant garden additions.
     </p>
     <div class="buttons is-centered">
-      <a href="<%= about_page_pages_path %>" class="button is-primary is-large is-fullwidth-mobile">Learn More</a>
-      <a href="<%= contact_path %>" class="button is-primary is-large is-fullwidth-mobile">Contact Us</a>
+      <a href="<%= about_page_pages_path %>" class="button is-primary is-fullwidth-mobile">Learn More</a>
     </div>
   </div>
 </section>

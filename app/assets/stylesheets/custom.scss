@@ -1,0 +1,19 @@
+a {
+    list-style: none;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    #categories {
+      min-height: 1700px;
+    }
+  
+    #products {
+      min-height: 3700px;
+    }
+
+    #search {
+        min-height: 250px;
+    }
+  }

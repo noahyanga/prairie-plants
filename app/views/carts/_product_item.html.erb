@@ -1,20 +1,23 @@
-<li class="box">
-  <strong><%= product.name %></strong> - $<%= product.price %> each
-  <br>
-  Quantity: <%= quantity %>
-  <br>
-  Subtotal: $<%= (product.price * quantity).round(2) %> <!-- Round to two decimal places -->
 
+<ul class="list-style-none">
+  <li class="box mb-4">
+    <div class="columns is-vcentered">
+      <div class="column is-half">
+        <strong class="is-size-4"><%= product.name %></strong>
+        <p class="is-size-6">$<%= product.price %> each</p>
+        <p class="is-size-5"><strong>Subtotal:</strong> $<%= (product.price * quantity).round(2) %></p>
+      </div>
   <!-- Form to update quantity -->
   <%= form_with(url: update_quantity_carts_path(id: product.id), method: :patch, local: true, authenticity_token: false) do |form| %>
     <%= tag(:input, type: 'hidden', name: 'authenticity_token', value: form_authenticity_token) %>
-    <%= form.number_field :quantity, value: quantity, min: 1, step: 1, class: "input is-small", id: "quantity_#{product.id}" %>
-    <%= form.submit 'Update Quantity', class: "button is-info is-small" %>
+    <%= form.number_field :quantity, value: quantity, min: 1, step: 1, class: "input is-small is-size-5", style: "max-width: 80px",id: "quantity_#{product.id}" %>
+    <%= form.submit 'Update Quantity', class: "button is-info is-normal mb-3" %>
   <% end %>
 
   <!-- Form to remove the product -->
   <%= form_with(url: remove_product_carts_path(id: product.id), method: :delete, local: true, authenticity_token: false) do %>
     <%= tag(:input, type: 'hidden', name: 'authenticity_token', value: form_authenticity_token) %>
-    <button type="submit" class="button is-danger is-small">Remove</button>
+    <button type="submit" class="button is-danger is-normal mb-3">Remove</button>
   <% end %>
 </li>
+</ul>

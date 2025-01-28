@@ -1,5 +1,5 @@
 <div class="search-bar has-text-centered">
-  <h2 class="title is-3">Search Products</h2>
+  <h2 class="title is-3 mt-5">Search Products</h2>
   <%= form_with url: search_products_path, method: :get, local: true do %>
     <div class="columns is-mobile is-multiline is-flex is-justify-content-center">
       <!-- Search Bar -->
@@ -23,7 +23,7 @@
         <!-- Submit Button -->
         <div class="field">
           <div class="control">
-            <%= submit_tag "Search", class: 'button is-info' %>
+            <%= submit_tag "Search", class: 'button is-info mb-3' %>
           </div>
         </div>
       </div>
