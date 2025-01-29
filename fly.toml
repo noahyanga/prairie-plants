@@ -1,8 +1,3 @@
-# fly.toml app configuration file generated for prairie-plants-dark-breeze-5676 on 2025-01-28T16:47:20-06:00
-#
-# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
-#
-
 app = 'prairie-plants-dark-breeze-5676'
 primary_region = 'ord'
 console_command = '/rails/bin/rails console'
@@ -37,7 +32,6 @@ console_command = '/rails/bin/rails console'
     handlers = ["http"]
     port = 3000
 
-
 [[vm]]
   memory = '512mb'
   cpu_kind = 'shared'
@@ -51,6 +45,9 @@ console_command = '/rails/bin/rails console'
   PORT = "3000"
   BINDING = "0.0.0.0"
 
+[deploy]
+  release_command = "bin/rails db:migrate && bin/rails db:seed"
+
 [[services]]
   internal_port = 3000
   protocol = "tcp"
@@ -63,6 +60,6 @@ console_command = '/rails/bin/rails console'
     handlers = ["tls", "http"]
     port = 443
 
-# Allow outbound HTTP requests
 [experimental]
-  allowed_public_ports = [80, 443, 3000]
+  allowed_public_ports = [80, 433, 3000]
+  auto_rollback = false

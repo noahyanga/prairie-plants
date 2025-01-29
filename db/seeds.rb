@@ -21,11 +21,10 @@ Province.delete_all
 
 # Method to scrape data for a specific category
 def scrape_category(url, category_name)
-  response = HTTParty.get(url)
+  response = HTTParty.get(url, timeout: 10) # Fail after 10 seconds
   document = Nokogiri::HTML(response.body)
   products = []
 
-  # Loop through each product element on the page to extract name, price, and image
   document.css('li.product').each do |product|
     name = product.css('h2.woocommerce-loop-product__title.product-info__title').text.strip
     price_text = product.css('bdi').text.strip
@@ -38,7 +37,14 @@ image_url: image_url }
   end
 
   products
+rescue Net::ReadTimeout, Net::OpenTimeout => e
+  puts "Timeout fetching #{category_name}: #{e.message}"
+  []
+rescue StandardError => e
+  puts "Error scraping #{category_name}: #{e.message}"
+  []
 end
+
 
 # Seeding categories and products
 puts "Seeding categories and products..."
