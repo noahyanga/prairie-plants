@@ -46,7 +46,7 @@ gem 'aws-sdk-s3', require: false
 gem 'fog-aws'
 
 # Carrierwave
-gem 'carrierwave', '~> 3.0'
+gem 'carrierwave', '~> 3.1'
 
 # mini_magick
 gem 'mini_magick', '~> 4.11'
