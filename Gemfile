@@ -98,6 +98,8 @@ end
 group :production do
   gem "pg"
   gem 'rails_12factor' # For better production logging
+  gem 'httparty' # If using HTTP requests
+  gem 'nokogiri' # If parsing HTML
 end
 
 gem "dockerfile-rails", ">= 1.6", :group => :development

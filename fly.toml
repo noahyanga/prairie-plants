@@ -50,3 +50,19 @@ console_command = '/rails/bin/rails console'
   RAILS_ENV = "production"
   PORT = "3000"
   BINDING = "0.0.0.0"
+
+[[services]]
+  internal_port = 3000
+  protocol = "tcp"
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+
+# Allow outbound HTTP requests
+[experimental]
+  allowed_public_ports = [80, 443, 3000]
