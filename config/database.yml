@@ -27,13 +27,20 @@ test:
 #
 # Similarly, if you deploy your application as a Docker container, you must
 # ensure the database is located in a persisted volume.
+# production:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: <%= ENV['DATABASE_NAME'] %>
+#   username: <%= ENV['DATABASE_USERNAME'] %>
+#   password: <%= ENV['DATABASE_PASSWORD'] %>
+#   host: localhost
+#   port: 5432
+#   pool: 5
+#   secret_key_base: <%= ENV['SECRET_KEY_BASE'] %>
+
+
 production:
   adapter: postgresql
   encoding: unicode
-  database: <%= ENV['DATABASE_NAME'] %>
-  username: <%= ENV['DATABASE_USERNAME'] %>
-  password: <%= ENV['DATABASE_PASSWORD'] %>
-  host: localhost
-  port: 5432
   pool: 5
-  secret_key_base: <%= ENV['SECRET_KEY_BASE'] %>
+  url: <%= ENV['DATABASE_URL'] %>

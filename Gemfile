@@ -8,7 +8,7 @@ gem "rails", "~> 7.2.2"
 gem "sprockets-rails"
 gem 'sprockets', '~> 4.0'
 # Use sqlite3 as the database for Active Record
-# gem "sqlite3", ">= 1.4"
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
@@ -40,9 +40,6 @@ gem 'httparty'
 
 # Sassc
 gem 'sassc-rails'
-
-# Google cloud storage
-gem 'google-cloud-storage'
 
 # AWS
 gem 'aws-sdk-s3', require: false
@@ -89,10 +86,9 @@ gem "bootsnap", require: false
 #  gem "rubocop-rails-omakase", require: false
 #end
 
-group :development do
+group :development, :test do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
-
   gem "sqlite3", ">= 1.4"
 
   # Highlight the fine-grained location where an error occurred [https://github.com/ruby/error_highlight]
@@ -101,12 +97,9 @@ end
 
 group :production do
   gem "pg"
-end
-
-group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
+  gem 'rails_12factor' # For better production logging
+  gem 'httparty' # If using HTTP requests
+  gem 'nokogiri' # If parsing HTML
 end
 
 gem "dockerfile-rails", ">= 1.6", :group => :development
