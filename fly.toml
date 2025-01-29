@@ -1,12 +1,24 @@
+<<<<<<< HEAD
 app = 'prairie-plants-dark-breeze-5676'
+=======
+# fly.toml app configuration file generated for exploreprairieplants on 2025-01-28T12:23:09-06:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'exploreprairieplants'
+>>>>>>> refs/remotes/origin/main
 primary_region = 'ord'
 console_command = '/rails/bin/rails console'
 
 [build]
+<<<<<<< HEAD
   [build.args]
     BUNDLE_WITHOUT = "development:test"
     BUNDLE_DEPLOYMENT = "true"
     BUNDLE_PATH = "/app/vendor/bundle"
+=======
+>>>>>>> refs/remotes/origin/main
 
 [http_service]
   internal_port = 3000
