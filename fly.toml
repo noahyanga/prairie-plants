@@ -1,27 +1,29 @@
-<<<<<<< HEAD
-app = 'prairie-plants-dark-breeze-5676'
-=======
-# fly.toml app configuration file generated for exploreprairieplants on 2025-01-28T12:23:09-06:00
+# fly.toml app configuration file generated for prairie-plants-fragrant-water-6365 on 2025-02-26T19:10:44-06:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'exploreprairieplants'
->>>>>>> refs/remotes/origin/main
+app = 'prairie-plants-fragrant-water-6365'
 primary_region = 'ord'
 console_command = '/rails/bin/rails console'
 
+[experimental]
+
 [build]
-<<<<<<< HEAD
-  [build.args]
-    BUNDLE_WITHOUT = "development:test"
-    BUNDLE_DEPLOYMENT = "true"
-    BUNDLE_PATH = "/app/vendor/bundle"
-=======
->>>>>>> refs/remotes/origin/main
+
+[deploy]
+  release_command = 'sh -c bin/rails db:migrate && bin/rails db:seed'
+
+[env]
+  AWS_REGION = 'us-east-2'
+  BINDING = '0.0.0.0'
+  PORT = '3001'
+  RAILS_ENV = 'production'
+  S3_BUCKET_NAME = 'prairieplants'
+  STRIPE_PUBLISHABLE_KEY = 'pk_test_51QUz6cKk6iqXFcWtM5VayayFMzrFUZVzGsFIu3pdqC0IfRYDKFHCSUSnF4LfHLoViMc6cexttjhk7PjO4Kds9rKv006AQyft7Z'
 
 [http_service]
-  internal_port = 3000
+  internal_port = 3001
   force_https = true
   auto_stop_machines = 'stop'
   auto_start_machines = true
@@ -40,38 +42,31 @@ console_command = '/rails/bin/rails console'
     [http_service.checks.headers]
       X-Forwarded-Proto = 'https'
 
-    [[http_service.ports]]
-    handlers = ["http"]
-    port = 3000
+  [[http_service.checks]]
+    interval = '10s'
+    timeout = '2s'
+    grace_period = '5s'
+    method = 'GET'
+    path = '/up'
+    protocol = 'http'
+    tls_skip_verify = false
+
+    [http_service.checks.headers]
+      X-Forwarded-Proto = 'https'
+
+[[services]]
+  protocol = 'tcp'
+  internal_port = 3001
+
+  [[services.ports]]
+    port = 80
+    handlers = ['http']
+
+  [[services.ports]]
+    port = 443
+    handlers = ['tls', 'http']
 
 [[vm]]
   memory = '512mb'
   cpu_kind = 'shared'
   cpus = 1
-
-[env]
-  AWS_REGION = "us-east-2"
-  S3_BUCKET_NAME = "prairieplants"
-  STRIPE_PUBLISHABLE_KEY = "pk_test_51QUz6cKk6iqXFcWtM5VayayFMzrFUZVzGsFIu3pdqC0IfRYDKFHCSUSnF4LfHLoViMc6cexttjhk7PjO4Kds9rKv006AQyft7Z"
-  RAILS_ENV = "production"
-  PORT = "3000"
-  BINDING = "0.0.0.0"
-
-[deploy]
-  release_command = "bin/rails db:migrate && bin/rails db:seed"
-
-[[services]]
-  internal_port = 3000
-  protocol = "tcp"
-
-  [[services.ports]]
-    handlers = ["http"]
-    port = 80
-
-  [[services.ports]]
-    handlers = ["tls", "http"]
-    port = 443
-
-[experimental]
-  allowed_public_ports = [80, 433, 3000]
-  auto_rollback = false
