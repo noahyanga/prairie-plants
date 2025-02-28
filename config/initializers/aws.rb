@@ -7,4 +7,5 @@ if ENV['AWS_ACCESS_KEY_ID'].present? && ENV['AWS_SECRET_ACCESS_KEY'].present? &&
   )
 else
   Rails.logger.warn('AWS credentials are missing. Fog Storage will not be initialized.')
+  nil # Prevent raising an error
 end

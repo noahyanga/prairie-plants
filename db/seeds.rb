@@ -9,7 +9,7 @@ CATEGORY_URLS = {
   'Plant Decorations' => 'https://bloomscape.com/shop/plant-care-accessories/accessories/',
   'Pots & Planters'   => 'https://bloomscape.com/shop/plant-care-accessories/pots/',
   'Gardening Tools'   => 'https://bloomscape.com/shop/plant-care-accessories/tools/',
-  'Supplies'          => 'https://bloomscape.com/shop/plant-care-accessories/supplies/'
+  'Plant Care'        => 'https://bloomscape.com/shop/plant-care-accessories/nutrients-and-care/'
 }
 
 # Clear existing data
@@ -21,7 +21,7 @@ Province.delete_all
 
 # Method to scrape data for a specific category
 def scrape_category(url, category_name)
-  response = HTTParty.get(url, timeout: 10) # Fail after 10 seconds
+  response = HTTParty.get(url, timeout: 3000) # Fail after 10 seconds
   document = Nokogiri::HTML(response.body)
   products = []
 
@@ -61,7 +61,7 @@ ActiveRecord::Base.transaction do
     plants_data = scrape_category(url, category_name)
     category = Category.find_by(name: category_name)
 
-    plants_data.each do |plant_data|
+    plants_data.first(25).each do |plant_data|
       # Create product and associate it with the category
       product = Product.create!(
         name:        plant_data[:name],

@@ -1,29 +1,22 @@
-# fly.toml app configuration file generated for prairie-plants-fragrant-water-6365 on 2025-02-26T19:10:44-06:00
+# fly.toml app configuration file generated for prairie-plants on 2025-02-27T11:41:20-06:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'prairie-plants-fragrant-water-6365'
-primary_region = 'ord'
+app = 'prairie-plants'
+primary_region = 'sea'
 console_command = '/rails/bin/rails console'
 
-[experimental]
+[env]
+  PORT = "3000"
+  DATABASE_URL="postgresql://postgres:admin@localhost:5432/prairie_plants"
+
+
 
 [build]
 
-[deploy]
-  release_command = 'sh -c bin/rails db:migrate && bin/rails db:seed'
-
-[env]
-  AWS_REGION = 'us-east-2'
-  BINDING = '0.0.0.0'
-  PORT = '3001'
-  RAILS_ENV = 'production'
-  S3_BUCKET_NAME = 'prairieplants'
-  STRIPE_PUBLISHABLE_KEY = 'pk_test_51QUz6cKk6iqXFcWtM5VayayFMzrFUZVzGsFIu3pdqC0IfRYDKFHCSUSnF4LfHLoViMc6cexttjhk7PjO4Kds9rKv006AQyft7Z'
-
 [http_service]
-  internal_port = 3001
+  internal_port = 3000
   force_https = true
   auto_stop_machines = 'stop'
   auto_start_machines = true
@@ -42,31 +35,7 @@ console_command = '/rails/bin/rails console'
     [http_service.checks.headers]
       X-Forwarded-Proto = 'https'
 
-  [[http_service.checks]]
-    interval = '10s'
-    timeout = '2s'
-    grace_period = '5s'
-    method = 'GET'
-    path = '/up'
-    protocol = 'http'
-    tls_skip_verify = false
-
-    [http_service.checks.headers]
-      X-Forwarded-Proto = 'https'
-
-[[services]]
-  protocol = 'tcp'
-  internal_port = 3001
-
-  [[services.ports]]
-    port = 80
-    handlers = ['http']
-
-  [[services.ports]]
-    port = 443
-    handlers = ['tls', 'http']
-
 [[vm]]
-  memory = '512mb'
+  memory = '1024mb'
   cpu_kind = 'shared'
   cpus = 1
